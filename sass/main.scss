@@ -1,0 +1,31 @@
+@import 'reset';
+@import 'variables';
+
+body {
+    display: grid;
+    grid-template-columns: 251px 1fr;
+    grid-template-rows: 84px 1fr;
+    grid-template-areas:    "sidebar header"
+                            "sidebar main";
+}
+
+.header {
+    background-color: grey;
+    grid-area: header;
+}
+
+.sidebar {
+    background-color:$primary;
+    grid-area: sidebar;
+    height: 100vh;
+    color: #fff;
+}
+
+main {
+    grid-area: main;
+    padding: 48px;
+}
+
+.edit {
+    background-color: green;
+}

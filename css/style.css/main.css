@@ -1,0 +1,52 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 251px 1fr;
+      grid-template-columns: 251px 1fr;
+  -ms-grid-rows: 84px 1fr;
+      grid-template-rows: 84px 1fr;
+      grid-template-areas: "sidebar header" "sidebar main";
+}
+
+.header {
+  background-color: grey;
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: header;
+}
+
+.sidebar {
+  background-color: #181F47;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  grid-area: sidebar;
+  height: 100vh;
+  color: #fff;
+}
+
+main {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: main;
+  padding: 48px;
+}
+
+.edit {
+  background-color: green;
+}
+/*# sourceMappingURL=main.css.map */
