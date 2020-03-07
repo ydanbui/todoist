@@ -20,7 +20,8 @@ const todos = [{
 }]
 
 const filters = {
-    searchText: ''
+    searchText: '',
+    labelTag: null
 }
 
 // Render todos cards in .todo section
