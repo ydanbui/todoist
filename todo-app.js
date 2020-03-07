@@ -5,6 +5,9 @@ const editModule = document.querySelector('.edit')
 const headerBadgeAll = document.querySelector('#headerBadgeAll') 
 const headerBadgeInProgress = document.querySelector('#headerBadgeInProgress') 
 const headerBadgeCompleted = document.querySelector('#headerBadgeCompleted') 
+const allTab = document.querySelector('#allTab')
+const inProgressTab = document.querySelector('#inProgressTab')
+const completedTab = document.querySelector('#completedTab')
 
 const todos = [{
     text: 'You have no tasks! Add one!',
@@ -25,6 +28,7 @@ const todos = [{
 
 const filters = {
     searchText: '',
+    tab: 0, // 0 = all tab, 1 = in progress, 2 = completed
     labelTag: null
 }
 
@@ -49,7 +53,13 @@ const renderBadges = todos => {
 const renderTodos = (todos, filters) => {
     // New array of filtered todos
     const filteredTodos = todos.filter(todo => {
-        return todo.text.toLowerCase().includes(filters.searchText.toLowerCase())
+        if (filters.tab === 1) { // When in progress tab is clicked
+            return todo.text.toLowerCase().includes(filters.searchText.toLowerCase()) && !todo.completed
+        } else if (filters.tab === 2) { // When completed tab is clicked
+            return todo.text.toLowerCase().includes(filters.searchText.toLowerCase()) && todo.completed
+        } else { // When all tab is clicked (default)
+            return todo.text.toLowerCase().includes(filters.searchText.toLowerCase())
+        }
     })
 
     // Clear existing todo elements before rendering
@@ -93,5 +103,23 @@ addTaskBtn.addEventListener('click', e => {
 
     // Display edit module
     editModule.style.display = "block"
+})
 
+// Set filter when tab is clicked
+allTab.addEventListener('click', e => {
+    filters.tab = 0
+
+    renderTodos(todos, filters)
+})
+
+inProgressTab.addEventListener('click', e => {
+    filters.tab = 1
+
+    renderTodos(todos, filters)
+})
+
+completedTab.addEventListener('click', e => {
+    filters.tab = 2
+
+    renderTodos(todos, filters)
 })
