@@ -68,7 +68,8 @@ const renderTodos = (todos, filters) => {
     // Print each todo in the filtered todo array
     filteredTodos.forEach(todo => {
         const todoCard = document.createElement('article')
-        todoCard.textContent = todo.text
+        todoCard.innerHTML = `<input type="checkbox" class="todo__checkbox">
+        ${todo.text}`
         todoSection.appendChild(todoCard)
     })
 }
