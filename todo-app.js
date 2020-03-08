@@ -67,9 +67,31 @@ const renderTodos = (todos, filters) => {
 
     // Print each todo in the filtered todo array
     filteredTodos.forEach(todo => {
+        // Create the parent card
         const todoCard = document.createElement('article')
-        todoCard.innerHTML = `<input type="checkbox" class="todo__checkbox">
-        ${todo.text}`
+        todoCard.classList.add('todo__card')
+
+        // Create the checkbox
+        const todoCheckbox = document.createElement('input')
+        todoCheckbox.type = 'checkbox'
+        todoCheckbox.classList.add('todo__checkbox')
+        if (todo.completed) {
+            todoCheckbox.checked = true
+        }
+        todoCheckbox.addEventListener('change', e => {
+            console.log(todo.text)
+            todo.completed = !todo.completed
+            renderBadges(todos)
+            console.log(todo.completed)
+            // renderTodos(todos, filters)
+        })
+        todoCard.appendChild(todoCheckbox)
+
+        // Create the text content
+        const todoText = document.createElement('span')
+        todoText.textContent = todo.text
+        todoCard.appendChild(todoText)
+
         todoSection.appendChild(todoCard)
     })
 }
@@ -109,18 +131,39 @@ addTaskBtn.addEventListener('click', e => {
 // Set filter when tab is clicked
 allTab.addEventListener('click', e => {
     filters.tab = 0
+    document.querySelector('.heading').textContent = 'All'
 
     renderTodos(todos, filters)
 })
 
 inProgressTab.addEventListener('click', e => {
     filters.tab = 1
-
+    document.querySelector('.heading').textContent = 'In Progress'
     renderTodos(todos, filters)
+
+    const checkboxes = document.querySelectorAll('.todo__checkbox')
+
+    // If todo is checked, it is completed and the card is removed from this tab
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('click', e => {
+            checkbox.parentElement.remove()
+        })
+    })
+
 })
 
 completedTab.addEventListener('click', e => {
     filters.tab = 2
+    document.querySelector('.heading').textContent = 'Completed'
 
     renderTodos(todos, filters)
+
+    const checkboxes = document.querySelectorAll('.todo__checkbox')
+
+    // If todo is unchecked, it is in progress and is removed from this tab
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('click', e => {
+            checkbox.parentElement.remove()
+        })
+    })
 })

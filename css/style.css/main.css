@@ -46,6 +46,12 @@ main {
   padding: 48px;
 }
 
+.todo__card {
+  background-color: grey;
+  margin: 8px;
+  padding: 8px;
+}
+
 .edit {
   background-color: green;
   display: none;
