@@ -8,23 +8,27 @@ const headerBadgeCompleted = document.querySelector('#headerBadgeCompleted')
 const allTab = document.querySelector('#allTab')
 const inProgressTab = document.querySelector('#inProgressTab')
 const completedTab = document.querySelector('#completedTab')
+const storedTodos = localStorage.getItem('todos')
 
-const todos = [{
-    text: 'You have no tasks! Add one!',
-    completed: false,
-    label: [],
-    dueDate: 'Feb 28'
-}, {
-    text: 'Second task!',
-    completed: false,
-    label: [],
-    dueDate: 'Feb 28'
-}, {
-    text: 'You have aid!',
-    completed: true,
-    label: [],
-    dueDate: 'Feb 28'
-}]
+// Initialize todos with localstorage data if it exists
+let todos = storedTodos ? JSON.parse(storedTodos) : []
+
+// todos = [{
+//     text: 'You have no tasks! Add one!',
+//     completed: false,
+//     label: [],
+//     dueDate: 'Feb 28'
+// }, {
+//     text: 'Second task!',
+//     completed: false,
+//     label: [],
+//     dueDate: 'Feb 28'
+// }, {
+//     text: 'You have aid!',
+//     completed: true,
+//     label: [],
+//     dueDate: 'Feb 28'
+// }]
 
 const filters = {
     searchText: '',
@@ -78,13 +82,16 @@ const renderTodos = (todos, filters) => {
         if (todo.completed) {
             todoCheckbox.checked = true
         }
+
+        // Event handler for checking checkbox
         todoCheckbox.addEventListener('change', e => {
             console.log(todo.text)
             todo.completed = !todo.completed
+            localStorage.setItem('todos', JSON.stringify(todos))
             renderBadges(todos)
             console.log(todo.completed)
-            // renderTodos(todos, filters)
         })
+        
         todoCard.appendChild(todoCheckbox)
 
         // Create the text content
@@ -119,6 +126,7 @@ addTaskBtn.addEventListener('click', e => {
         label: [],
         dueDate: null
     })
+    localStorage.setItem('todos', JSON.stringify(todos))
 
     // Rerender todos and badge
     renderTodos(todos, filters)
