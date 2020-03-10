@@ -61,17 +61,10 @@ inProgressTab.addEventListener('click', e => {
     filters.tab = 1
     headingEl.textContent = 'In Progress'
     renderTodos(todos, filters)
-
-    const checkboxes = document.querySelectorAll('.todo__checkbox')
-    handleTodoCardWhenChecked(checkboxes)
 })
 
 completedTab.addEventListener('click', e => {
     filters.tab = 2
     headingEl.textContent = 'Completed'
-
     renderTodos(todos, filters)
-
-    const checkboxes = document.querySelectorAll('.todo__checkbox')
-    handleTodoCardWhenChecked(checkboxes)
 })

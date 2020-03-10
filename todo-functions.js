@@ -23,7 +23,10 @@ const generateTodoCheckboxDom = (todo) => {
      todoCheckbox.addEventListener('change', e => {
          todo.completed = !todo.completed
          saveTodos(todos)
+         
+        //  Rerender so that card will be removed from inprogress/completed when checked/unchecked
          renderBadges(todos)
+         renderTodos(todos, filters)
      })
 
      return todoCheckbox
@@ -97,6 +100,7 @@ const addTodo = todos => {
     })
 }
 
+/*REMOVED since we can just rerender the todos each time the checkbox is changed
 // Functionality so that changing the checkbox on the in progress/completed tabs removes the todo card
 const handleTodoCardWhenChecked = (checkboxes) => {
     // If todo is checked, it is completed and the card is removed from this tab
@@ -107,4 +111,4 @@ const handleTodoCardWhenChecked = (checkboxes) => {
             checkbox.parentElement.remove()
         })
     })
-}
+}*/
