@@ -9,8 +9,16 @@ const saveTodos = todos => {
     localStorage.setItem('todos', JSON.stringify(todos))
 }
 
-const deleteTodo = (todos, index) => {
-    todos.splice(index, 1)
+const deleteTodo = (todosArg, index) => {
+    // For deleting from the edit module. If we directly pass in a todo object, not the todos array
+    if (!Array.isArray(todosArg)) {
+        const ind = todos.findIndex( todo => todo === currentTodo)
+        console.log(ind)
+        todos.splice(ind, 1)
+        console.log('deleting object from array')
+        return
+    }
+    todosArg.splice(index, 1)
 }
 
 // Create todo checkbox DOM and add event handler to checkbox
@@ -46,8 +54,13 @@ const generateTodoCardDom = (todo, index) => {
 
     // Create the text content
     const todoText = document.createElement('span')
-    todoText.textContent = todo.text
+    todoText.textContent = todo.text ? todo.text : 'Write task'
     todoCard.appendChild(todoText)
+
+    // Create the due date element
+    const dateEl = document.createElement('span')
+    dateEl.textContent = todo.dueDate
+    todoCard.appendChild(dateEl)
 
     // Create the delete button
     const deleteTodoEl = document.createElement('button')
@@ -59,6 +72,17 @@ const generateTodoCardDom = (todo, index) => {
         renderBadges(todos)
     })
     todoCard.appendChild(deleteTodoEl)
+
+    // Open edit modul if card is clicked
+    todoCard.addEventListener('click', function(e) {
+        // Don't open it if checkbox or icon button clicked
+        if (e.target !== this && e.target !== todoText) {
+            return
+        }
+        setEditTodo(todo)
+        fillEditModule(todo)
+        displayEditModule(editModule)
+    })
 
     return todoCard
 }
@@ -100,20 +124,51 @@ const renderTodos = (todos, filters) => {
     filteredTodos.forEach((todo, index) => {
         const todoCard = generateTodoCardDom(todo, index)
         todoSection.appendChild(todoCard)
-        console.log(index)
     })
 }
 
 // Add new todo to end of todo array
 const addTodo = todos => {
-    todos.push({
-        id: uuidv4(),
-        text:'Write task',
+    // const id = uuidv4()
+
+    currentTodo = {
+        // id: uuidv4(),
+        text:'',
         completed: false,
         label: [],
-        dueDate: null
-    })
+        dueDate: '',
+        description: ''
+    }
+
+    todos.push(currentTodo)
+
+    return currentTodo
 }
+
+// Fills the edit module with content from the correct todo
+const fillEditModule = currentTodo => {
+    editTitle.value = currentTodo.text
+    editDate.value = currentTodo.dueDate
+    editDescription.value = currentTodo.description
+    console.log(editDescription)
+}
+
+// Display edit module
+const displayEditModule = editModule => {
+    editModule.style.display = "block"
+}
+
+// Close the edit module
+const closeEditModule = editModule => {
+    editModule.style.display = "none"
+}
+
+// Set the correct todo to fill edit module
+const setEditTodo = todo => {
+    currentTodo = todo
+}
+
+
 
 /*REMOVED since we can just rerender the todos each time the checkbox is changed
 // Functionality so that changing the checkbox on the in progress/completed tabs removes the todo card

@@ -30,10 +30,12 @@
         <button class="btn btn--primary btn--add-task">+ New Task</button>
         <article class="edit">
             EDIT
-            <input type="text" placeholder="New Task Name">
-            <label>Due date<input type="date"></label>
-            <label for="">Label</label>
-            <label for="">Description<textarea name="" id="" cols="30" rows="10"></textarea></label>
+            <button class="edit__complete">Complete</button>
+            <button class="edit__delete">Delete</button>
+            <button class="edit__close">x</button>
+            <input class="edit__title" type="text" placeholder="Write task">
+            <label class="edit__label">Due date<input class="edit__date" type="date"></label>
+            <label class="edit__label" for="">Description<textarea class="edit__description" name="" id="" cols="30" rows="10"></textarea></label>
         </article>
     </main>
 
@@ -41,5 +43,6 @@
 <script src="/scripts/todo-functions.js"></script>
 <script src="/scripts/todo-queries.js"></script>
 <script src="/scripts/todo-app.js"></script>
+<script src="/scripts/todo-edit.js"></script>
 </body>
 </html>git 

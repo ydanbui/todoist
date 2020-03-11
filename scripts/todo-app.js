@@ -1,6 +1,9 @@
 // Initialize todos with localstorage data if it exists
 const todos = getSavedTodos()
 
+// Current todo to be displayed by edit module
+let currentTodo = null
+
 // todos = [{
 //     text: 'You have no tasks! Add one!',
 //     completed: false,
@@ -36,17 +39,6 @@ searchBar.addEventListener('input', e => {
 
     // Render todos with new filter
     renderTodos(todos, filters)
-})
-
-// Add new task button click event handler
-addTaskBtn.addEventListener('click', e => {
-    addTodo(todos)
-    saveTodos(todos)
-    renderTodos(todos, filters)
-    renderBadges(todos)
-
-    // Display edit module
-    editModule.style.display = "block"
 })
 
 // Set filter when tab is clicked
