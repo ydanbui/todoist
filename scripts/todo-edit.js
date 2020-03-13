@@ -6,7 +6,7 @@ addTaskBtn.addEventListener('click', e => {
     renderTodos(todos, filters)
     renderBadges(todos)
 
-    displayEditModule(editModule)
+    displayEditModule()
 })
 
 
@@ -28,11 +28,11 @@ editDelete.addEventListener('click', e => {
     saveTodos(todos)
     renderTodos(todos, filters)
     renderBadges(todos)
-    closeEditModule(editModule)
+    closeEditModule()
 })
 
 editClose.addEventListener('click', e => {
-    closeEditModule(editModule)
+    closeEditModule()
 })
 
 editDate.addEventListener('input', e => {

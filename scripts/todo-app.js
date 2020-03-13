@@ -1,5 +1,9 @@
+/*
+- Delete task while it's being edited.
+*/
+
 // Initialize todos with localstorage data if it exists
-const todos = getSavedTodos()
+let todos = getSavedTodos()
 
 // Current todo to be displayed by edit module
 let currentTodo = null
@@ -59,4 +63,28 @@ completedTab.addEventListener('click', e => {
     filters.tab = 2
     headingEl.textContent = 'Completed'
     renderTodos(todos, filters)
+})
+
+// Sync data across windows
+window.addEventListener('storage', e => {
+    if (e.key === 'todos') {
+        todos = JSON.parse(e.newValue)
+        renderTodos(todos, filters)
+        renderBadges(todos)
+
+        // If the edit module for the same todo are open in both window
+        if (currentTodo) {
+            // Update currentTodo to the newest version by searching the updates todos array
+            currentTodo = todos.find(todo => todo.id === currentTodo.id)
+        } 
+        // If we delete the todo while the edit module is open in the other window. The currentTodo will be undefined after the code above runs
+        if (!currentTodo) {
+            // Close the edit module
+            closeEditModule()
+            // don't run fillEditModule below
+            return
+        }
+
+        fillEditModule(currentTodo)
+    }
 })

@@ -70,6 +70,11 @@ const generateTodoCardDom = (todo, index) => {
         saveTodos(todos)
         renderTodos(todos, filters)
         renderBadges(todos)
+
+        // If this todo is currently being edited, close that when this gets deleted
+        if (currentTodo === todo) {
+            closeEditModule()
+        }
     })
     todoCard.appendChild(deleteTodoEl)
 
@@ -81,7 +86,7 @@ const generateTodoCardDom = (todo, index) => {
         }
         setEditTodo(todo)
         fillEditModule(todo)
-        displayEditModule(editModule)
+        displayEditModule()
     })
 
     return todoCard
@@ -132,7 +137,7 @@ const addTodo = todos => {
     // const id = uuidv4()
 
     currentTodo = {
-        // id: uuidv4(),
+        id: uuidv4(),
         text:'',
         completed: false,
         label: [],
@@ -150,16 +155,15 @@ const fillEditModule = currentTodo => {
     editTitle.value = currentTodo.text
     editDate.value = currentTodo.dueDate
     editDescription.value = currentTodo.description
-    console.log(editDescription)
 }
 
 // Display edit module
-const displayEditModule = editModule => {
+const displayEditModule = () => {
     editModule.style.display = "block"
 }
 
 // Close the edit module
-const closeEditModule = editModule => {
+const closeEditModule = () => {
     editModule.style.display = "none"
 }
 
