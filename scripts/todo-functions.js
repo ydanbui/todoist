@@ -150,6 +150,7 @@ const renderTodos = (todos, filters) => {
 // Add new todo to end of todo array
 const addTodo = todos => {
     // const id = uuidv4()
+    const timestamp = moment().valueOf()
 
     currentTodo = {
         id: uuidv4(),
@@ -157,7 +158,10 @@ const addTodo = todos => {
         completed: false,
         label: [],
         dueDate: '',
-        description: ''
+        description: '',
+        createdAt: timestamp,
+        updatedAt: timestamp,
+        history: [`Task created on ${moment(timestamp).format('MMM D, YY')}`]
     }
 
     todos.push(currentTodo)
