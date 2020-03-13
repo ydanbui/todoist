@@ -1,4 +1,6 @@
 /*
+- Sort by functionality
+- Timeline of changes. May need to ad change event listener since input fires too much when making changes
 - Delete task while it's being edited.
 */
 

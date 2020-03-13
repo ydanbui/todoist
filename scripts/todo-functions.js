@@ -42,6 +42,21 @@ const generateTodoCheckboxDom = (todo) => {
     return todoCheckbox
 }
 
+// Function to translate the due daye into formated string to display
+const getDueDate = todo => {
+    if (!todo.dueDate) {
+         // if the due daye has not been set
+        return todo.dueDate
+    // } else if (moment(todo.dueDate).valueOf() > moment().add(1, 'y').valueOf()) {
+    } else if (moment(todo.dueDate).year() !== moment().year()) {
+        // If the due date is not this year, display the year
+        return moment(todo.dueDate).format('MMM D YYYY')
+    } else {
+        // don't display the year
+        return moment(todo.dueDate).format('MMM D')
+    }
+}
+
 // Create the todo card element
 const generateTodoCardDom = (todo, index) => {
     // Create the parent card
@@ -59,7 +74,7 @@ const generateTodoCardDom = (todo, index) => {
 
     // Create the due date element
     const dateEl = document.createElement('span')
-    dateEl.textContent = todo.dueDate
+    dateEl.textContent = getDueDate(todo)
     todoCard.appendChild(dateEl)
 
     // Create the delete button
