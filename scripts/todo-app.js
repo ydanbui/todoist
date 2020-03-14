@@ -88,7 +88,6 @@ window.addEventListener('storage', e => {
             // don't run fillEditModule below
             return
         }
-
         fillEditModule(currentTodo)
     }
 })

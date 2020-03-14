@@ -32,13 +32,14 @@ const generateTodoCheckboxDom = (todo) => {
     // Event handler for checking checkbox
     todoCheckbox.addEventListener('change', e => {
         todo.completed = !todo.completed
+        changeCompletedHistory(todo)
+
         saveTodos(todos)
         
         //  Rerender so that card will be removed from inprogress/completed when checked/unchecked
         renderBadges(todos)
         renderTodos(todos, filters)
 
-       changeCompletedHistory(todo)
 
         // Fill the edit module with the current todo (may not be this one)
         fillEditModule(currentTodo)

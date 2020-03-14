@@ -18,11 +18,12 @@ editTitle.addEventListener('input', e => {
 
 editComplete.addEventListener('click', e => {
     currentTodo.completed = !currentTodo.completed
+    changeCompletedHistory(currentTodo)
+
     saveTodos(todos)
     renderTodos(todos, filters)
     renderBadges(todos)
-    
-    changeCompletedHistory(currentTodo)
+
     fillEditModule(currentTodo)
 })
 
