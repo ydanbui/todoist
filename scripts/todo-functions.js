@@ -34,9 +34,14 @@ const generateTodoCheckboxDom = (todo) => {
         todo.completed = !todo.completed
         saveTodos(todos)
         
-    //  Rerender so that card will be removed from inprogress/completed when checked/unchecked
+        //  Rerender so that card will be removed from inprogress/completed when checked/unchecked
         renderBadges(todos)
         renderTodos(todos, filters)
+
+       changeCompletedHistory(todo)
+
+        // Fill the edit module with the current todo (may not be this one)
+        fillEditModule(currentTodo)
     })
 
     return todoCheckbox
@@ -161,7 +166,7 @@ const addTodo = todos => {
         description: '',
         createdAt: timestamp,
         updatedAt: timestamp,
-        history: [`Task created on ${moment(timestamp).format('MMM D, YY')}`]
+        history: [`Task created. ${generateTimeString(moment(timestamp))}`]
     }
 
     todos.push(currentTodo)
@@ -169,11 +174,51 @@ const addTodo = todos => {
     return currentTodo
 }
 
+// Create the time string for the todo activity timeline
+const generateTimeString = momentArg => {
+    return `<span class = "edit__timestamp">${momentArg.calendar(moment(), {
+        sameElse:'MMM D'
+    })}</span>`
+}
+
+// Add an update to the todo's history
+const updateTodoHistory = (todo, updateString) => {
+    // Add given string argument to beginning of history property array
+    todo.history.unshift(updateString)
+}
+
+// Add change to or remove change from todo history
+const changeCompletedHistory = todo => {
+     if (todo.completed) {
+        // if being marked completed
+        updateTodoHistory(todo, `Task completed. ${generateTimeString(moment())}`)
+    } else {
+        // if being marked incomplete
+        const index = todo.history.findIndex(update => {
+            // Remove the completed update from task history
+            return update.includes('complete')
+        })
+        todo.history.splice(index, 1)
+    }
+}
+
+// Generate timeine dom elements in edit module
+const generateHistoryDOM = todo => {
+    // loop through todo.history array and generate p elements for each update
+    todo.history.forEach(change => {
+        const p = document.createElement('p') 
+        p.innerHTML = change
+        editHistory.appendChild(p)
+    })
+}
+
 // Fills the edit module with content from the correct todo
 const fillEditModule = currentTodo => {
+    editHistory.innerHTML = ''
     editTitle.value = currentTodo.text
     editDate.value = currentTodo.dueDate
     editDescription.value = currentTodo.description
+    generateHistoryDOM(currentTodo)
 }
 
 // Display edit module

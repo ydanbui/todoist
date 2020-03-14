@@ -2,8 +2,9 @@
 - Sort by functionality
 - Timeline of changes. May need to ad change event listener since input fires too much when making changes
 - For timeline, function that checks how far away date was and outputs either calendar date or relative days ago
-- Delete task while it's being edited.
 */
+
+console.log(generateTimeString(moment('2020-03-05')))
 
 // Initialize todos with localstorage data if it exists
 let todos = getSavedTodos()

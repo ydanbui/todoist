@@ -21,6 +21,9 @@ editComplete.addEventListener('click', e => {
     saveTodos(todos)
     renderTodos(todos, filters)
     renderBadges(todos)
+    
+    changeCompletedHistory(currentTodo)
+    fillEditModule(currentTodo)
 })
 
 editDelete.addEventListener('click', e => {
