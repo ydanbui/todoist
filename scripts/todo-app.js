@@ -27,6 +27,16 @@ let currentTodo = null
 //     dueDate: 'Feb 28'
 // }]
 
+const labelss = [{
+    name: 'Design',
+    color: '#FFB45e'
+}, {
+    name: 'Web Development',
+    color: '#B7DDAC'
+}]
+
+const labels = getSavedLabels()
+
 const filters = {
     searchText: '',
     tab: 0, // 0 = all tab, 1 = in progress, 2 = completed
@@ -35,6 +45,7 @@ const filters = {
 
 renderTodos(todos, filters)
 renderBadges(todos)
+renderLabels(labels)
 
 // Search bar input event handler
 searchBar.addEventListener('input', e => {
