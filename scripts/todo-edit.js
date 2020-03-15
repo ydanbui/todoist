@@ -11,9 +11,32 @@ addTaskBtn.addEventListener('click', e => {
 
 
 editTitle.addEventListener('input', e => {
-    currentTodo.text = e.target.value
+    currentTodo.title = e.target.value
     saveTodos(todos)
     renderTodos(todos, filters)
+})
+
+editTitle.addEventListener('change', e => {
+    // If title is being changed
+    if (currentTodo.updatedAt.title) { // Check if title has been set
+        // Check if change log exists
+        const index = currentTodo.history.findIndex(change => {
+            return change.includes('Title')
+        })
+        
+        // If index is -1, then changelog doesn't exist and we know the title has only been initialized once
+        // Check if change log exists and if it was changed withint the last hour
+        if (index >= 0 && wasUpdatedRecently(currentTodo.updatedAt.title)) {
+            // If it was changed within last hour, override the change log rather than add another
+            currentTodo.history.splice(index,1)
+        }
+        updateTodoHistory(currentTodo, `Title changed to "${e.target.value}". ${generateTimeString(moment())}`)
+        fillEditModule(currentTodo)
+    } 
+        
+    // Don't add initial titling to history (skip of above code block if initializing)
+    currentTodo.updatedAt.title = moment().valueOf()
+    saveTodos(todos)
 })
 
 editComplete.addEventListener('click', e => {

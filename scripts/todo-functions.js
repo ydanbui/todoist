@@ -74,9 +74,9 @@ const generateTodoCardDom = (todo, index) => {
     todoCard.appendChild(todoCheckbox)
 
     // Create the text content
-    const todoText = document.createElement('span')
-    todoText.textContent = todo.text ? todo.text : 'Write task'
-    todoCard.appendChild(todoText)
+    const todoTitle = document.createElement('span')
+    todoTitle.textContent = todo.title ? todo.title : 'Write task'
+    todoCard.appendChild(todoTitle)
 
     // Create the due date element
     const dateEl = document.createElement('span')
@@ -102,7 +102,7 @@ const generateTodoCardDom = (todo, index) => {
     // Open edit modul if card is clicked
     todoCard.addEventListener('click', function(e) {
         // Don't open it if checkbox or icon button clicked
-        if (e.target !== this && e.target !== todoText) {
+        if (e.target !== this && e.target !== todoTitle) {
             return
         }
         setEditTodo(todo)
@@ -135,11 +135,11 @@ const renderTodos = (todos, filters) => {
     // New array of filtered todos
     const filteredTodos = todos.filter(todo => {
         if (filters.tab === 1) { // When in progress tab is clicked
-            return todo.text.toLowerCase().includes(filters.searchText.toLowerCase()) && !todo.completed
+            return todo.title.toLowerCase().includes(filters.searchText.toLowerCase()) && !todo.completed
         } else if (filters.tab === 2) { // When completed tab is clicked
-            return todo.text.toLowerCase().includes(filters.searchText.toLowerCase()) && todo.completed
+            return todo.title.toLowerCase().includes(filters.searchText.toLowerCase()) && todo.completed
         } else { // When all tab is clicked (default)
-            return todo.text.toLowerCase().includes(filters.searchText.toLowerCase())
+            return todo.title.toLowerCase().includes(filters.searchText.toLowerCase())
         }
     })
 
@@ -160,13 +160,15 @@ const addTodo = todos => {
 
     currentTodo = {
         id: uuidv4(),
-        text:'',
+        title:'',
         completed: false,
         label: [],
         dueDate: '',
         description: '',
         createdAt: timestamp,
-        updatedAt: timestamp,
+        updatedAt: {
+            title: null,
+        },
         history: [`Task created. ${generateTimeString(moment(timestamp))}`]
     }
 
@@ -216,7 +218,7 @@ const generateHistoryDOM = todo => {
 // Fills the edit module with content from the correct todo
 const fillEditModule = currentTodo => {
     editHistory.innerHTML = ''
-    editTitle.value = currentTodo.text
+    editTitle.value = currentTodo.title
     editDate.value = currentTodo.dueDate
     editDescription.value = currentTodo.description
     generateHistoryDOM(currentTodo)
@@ -235,6 +237,12 @@ const closeEditModule = () => {
 // Set the correct todo to fill edit module
 const setEditTodo = todo => {
     currentTodo = todo
+}
+
+// Check if todo property was updated within the past hours
+const wasUpdatedRecently = (property) => {
+    // example of property todo.updatedAt.title
+    return moment().diff(moment(property), 'hours') < 1
 }
 
 
