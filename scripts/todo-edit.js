@@ -86,3 +86,18 @@ editDescription.addEventListener('input', e => {
     currentTodo.description = e.target.value
     saveTodos(todos)
 })
+
+editDescription.addEventListener('change', e => {
+    // If description was updated recently
+    if (currentTodo.updatedAt.description && wasUpdatedRecently(currentTodo.updatedAt.description)) {
+        const index = currentTodo.history.findIndex(change => {
+            return change.includes('description')
+        })
+        // Delete the existing change log.
+        currentTodo.history.splice(index, 1)
+    }
+
+    updateTodoHistory(currentTodo, `Task description changed. ${generateTimeString(moment())}`)
+    currentTodo.updatedAt.description = moment()
+    fillEditModule(currentTodo)
+})
