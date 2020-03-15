@@ -30,7 +30,7 @@ editTitle.addEventListener('change', e => {
             // If it was changed within last hour, override the change log rather than add another
             currentTodo.history.splice(index,1)
         }
-        updateTodoHistory(currentTodo, `Title changed to "${e.target.value}". ${generateTimeString(moment())}`)
+        updateTodoHistory(currentTodo, `Title changed to "${e.target.value}". `)
         fillEditModule(currentTodo)
     } 
         
@@ -75,7 +75,7 @@ editDate.addEventListener('input', e => {
     }
 
     currentTodo.updatedAt.dueDate = moment().valueOf()
-    updateTodoHistory(currentTodo, `Due date changed to ${getDueDate(currentTodo)}. ${generateTimeString(moment())}`)
+    updateTodoHistory(currentTodo, `Due date changed to ${getDueDate(currentTodo)}. `)
 
     saveTodos(todos)
     renderTodos(todos, filters)
@@ -97,7 +97,7 @@ editDescription.addEventListener('change', e => {
         currentTodo.history.splice(index, 1)
     }
 
-    updateTodoHistory(currentTodo, `Task description changed. ${generateTimeString(moment())}`)
+    updateTodoHistory(currentTodo, 'Task description changed. ')
     currentTodo.updatedAt.description = moment()
     fillEditModule(currentTodo)
 })

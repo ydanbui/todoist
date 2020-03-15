@@ -4,8 +4,6 @@
 - For timeline, function that checks how far away date was and outputs either calendar date or relative days ago
 */
 
-console.log(generateTimeString(moment('2020-03-05')))
-
 // Initialize todos with localstorage data if it exists
 let todos = getSavedTodos()
 

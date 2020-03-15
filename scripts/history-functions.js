@@ -15,7 +15,10 @@ const updateTodoHistory = (todo, updateString) => {
 const changeCompletedHistory = todo => {
      if (todo.completed) {
         // if being marked completed
-        updateTodoHistory(todo, `Task completed. ${generateTimeString(moment())}`)
+        todo.updatedAt.completed = moment().valueOf()
+
+        // Add to the todo history array
+        updateTodoHistory(todo, 'Task completed. ')
     } else {
         // if being marked incomplete
         const index = todo.history.findIndex(update => {
@@ -26,12 +29,29 @@ const changeCompletedHistory = todo => {
     }
 }
 
+// Add the time stamp to each history string relative to the moment of generation
+const appendTimestamp = (p, todo, change) => {
+    if (change.includes('created')) {
+        p.innerHTML = change + generateTimeString(moment(todo.createdAt))
+    } else if (change.includes('complete')) {
+        p.innerHTML = change + generateTimeString(moment(todo.updatedAt.completed))
+    } else if (change.includes('Title')) {
+        p.innerHTML = change + generateTimeString(moment(todo.updatedAt.title))
+    } else if (change.includes('date')) {
+        p.innerHTML = change + generateTimeString(moment(todo.updatedAt.dueDate))
+    } else if (change.includes('description')) {
+        p.innerHTML = change + generateTimeString(moment(todo.updatedAt.description))
+    }
+}
+
 // Generate timeine dom elements in edit module
 const generateHistoryDOM = todo => {
     // loop through todo.history array and generate p elements for each update
     todo.history.forEach(change => {
         const p = document.createElement('p') 
-        p.innerHTML = change
+
+        appendTimestamp(p, todo, change)
+        
         editHistory.appendChild(p)
     })
 }

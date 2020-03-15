@@ -168,10 +168,11 @@ const addTodo = todos => {
         createdAt: timestamp,
         updatedAt: {
             title: null,
+            completed: null,
             dueDate: null,
             description: null
         },
-        history: [`Task created. ${generateTimeString(moment(timestamp))}`]
+        history: ['Task created. ']
     }
 
     todos.push(currentTodo)
