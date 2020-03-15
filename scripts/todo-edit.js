@@ -64,8 +64,22 @@ editClose.addEventListener('click', e => {
 
 editDate.addEventListener('input', e => {
     currentTodo.dueDate = e.target.value
+
+    // If the due date has already been set and was updated recently
+    if (currentTodo.updatedAt.dueDate && wasUpdatedRecently(currentTodo.updatedAt.dueDate)) {
+        const index = currentTodo.history.findIndex(change => {
+            return change.includes('date')
+        })
+        // Delete the existing change log.
+        currentTodo.history.splice(index, 1)
+    }
+
+    currentTodo.updatedAt.dueDate = moment().valueOf()
+    updateTodoHistory(currentTodo, `Due date changed to ${getDueDate(currentTodo)}. ${generateTimeString(moment())}`)
+
     saveTodos(todos)
     renderTodos(todos, filters)
+    fillEditModule(currentTodo)
 })
 
 editDescription.addEventListener('input', e => {
