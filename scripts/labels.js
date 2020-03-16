@@ -57,7 +57,11 @@ const renderLabels = labels => {
 }
 
 const getSavedLabels = () => {
-    return  localStorage.getItem('labels') ? JSON.parse(localStorage.getItem('labels')) : []
+    try {
+        return  localStorage.getItem('labels') ? JSON.parse(localStorage.getItem('labels')) : []
+    } catch(e) {
+        return []
+    }
 }
 
 const saveLabels = labels => {
