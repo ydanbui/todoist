@@ -19,6 +19,26 @@ body {
     grid-area: sidebar;
     height: 100vh;
     color: #fff;
+
+    &__bullet {
+        height: 6px;
+        width: 6px;
+        display: inline-block;
+        background-color: blue;
+        border-radius: 50%;
+    }
+
+    &__labels {
+        list-style: none;
+    }
+
+    &__label {
+
+    }
+
+    &__label-name {
+        display: inline-block;
+    }
 }
 
 main {

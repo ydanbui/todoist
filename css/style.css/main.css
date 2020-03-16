@@ -39,6 +39,22 @@ body {
   color: #fff;
 }
 
+.sidebar__bullet {
+  height: 6px;
+  width: 6px;
+  display: inline-block;
+  background-color: blue;
+  border-radius: 50%;
+}
+
+.sidebar__labels {
+  list-style: none;
+}
+
+.sidebar__label-name {
+  display: inline-block;
+}
+
 main {
   -ms-grid-row: 2;
   -ms-grid-column: 2;
