@@ -1,3 +1,5 @@
+'use strict'
+
 const sidebar = document.querySelector('.sidebar__body')
 const sidebarLabels = document.querySelector('.sidebar__labels')
 const createLabelBtn = document.querySelector('.btn--create-label')

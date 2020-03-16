@@ -1,3 +1,5 @@
+'use strict'
+
 // Retried saved todos from localStorage if they exist
 const getSavedTodos = () => {
     const storedTodos = localStorage.getItem('todos')

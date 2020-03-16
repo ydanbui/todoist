@@ -1,3 +1,5 @@
+'use strict'
+
 const searchBar = document.querySelector('.header__search')
 const addTaskBtn = document.querySelector('.btn--add-task')
 const todoSection = document.querySelector('.todo')

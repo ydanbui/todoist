@@ -1,3 +1,5 @@
+'use strict'
+
 // Create the time string for the todo activity timeline
 const generateTimeString = momentArg => {
     return `<span class = "edit__timestamp">${momentArg.calendar(moment(), {

@@ -1,3 +1,5 @@
+'use strict'
+
 // Add new task button click event handler
 addTaskBtn.addEventListener('click', e => {
     // Adds todos and passes in that todo to fill edit module

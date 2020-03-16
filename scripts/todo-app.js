@@ -1,3 +1,5 @@
+'use strict'
+
 /*
 - Sort by functionality
 - Timeline of changes. May need to ad change event listener since input fires too much when making changes
