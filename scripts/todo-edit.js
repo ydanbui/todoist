@@ -7,30 +7,41 @@ editTitle.addEventListener('input', e => {
 })
 
 editTitle.addEventListener('change', e => {
-    console.log(currentTodo.history)
     // If title is being changed
-    if (!(currentTodo.history.find(changeObj => changeObj.field === 'title'))) { // Check if title has been set
+    if (currentTodo.history.find(changeObj => changeObj.field === 'title')) { // Check if title has been set
         
         // Check if change log exists
         const index = currentTodo.history.findIndex(changeObj => {
             return changeObj.field === 'title'
         })
+
         
         // If index is -1, then changelog doesn't exist and we know the title has only been initialized once
         // Check if change log exists and if it was changed withint the last hour
         if (index >= 0 && wasUpdatedRecently(currentTodo.history[index].updatedAt)) {
+            console.log(index, currentTodo.history)
+            debugger
             // If it was changed within last hour, override the change log rather than add another
             currentTodo.history.splice(index,1)
+            console.log(index, currentTodo.history)
+            debugger
         }
         updateTodoHistory(currentTodo, {
             field: 'title',
             text: `Title changed to "${e.target.value}". `,
             updatedAt: moment().valueOf()
         })
+
         // updateTodoHistory(currentTodo, `Title changed to "${e.target.value}". `)
+        
         fillEditModule(currentTodo)
     } 
-        
+    
+    updateTodoHistory(currentTodo, {
+        field: 'title',
+        text: `Title changed to "${e.target.value}". `,
+        updatedAt: moment().valueOf()
+    }) 
     // Don't add initial titling to history (skip of above code block if initializing)
     saveTodos(todos)
 })
