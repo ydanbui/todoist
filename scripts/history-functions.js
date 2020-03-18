@@ -41,9 +41,9 @@ const appendTimestamp = (p, todo, changeObj) => {
         p.innerHTML = changeObj.text + generateTimeString(moment(changeObj.updatedAt))
     } else if (changeObj.field === 'title') {
         p.innerHTML = changeObj.text + generateTimeString(moment(changeObj.updatedAt))
-    } else if (changeObj.includes('date')) {
+    } else if (changeObj.field === 'dueDate') {
         p.innerHTML = changeObj.text + generateTimeString(moment(changeObj.updatedAt))
-    } else if (changeObj.includes('description')) {
+    } else if (changeObj.field === 'description') {
         p.innerHTML = changeObj.text + generateTimeString(moment(changeObj.updatedAt))
     }
 }

@@ -173,7 +173,6 @@ const addTodo = todos => {
         updatedAt: {
             title: null,
             completed: null,
-            dueDate: null,
             description: null
         },
         history: [{

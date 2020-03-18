@@ -65,18 +65,21 @@ editClose.addEventListener('click', e => {
 
 editDate.addEventListener('input', e => {
     currentTodo.dueDate = e.target.value
+    
+    // Search the history array for a due date change log
+    const index = currentTodo.history.findIndex(changeObj => changeObj.field === 'dueDate')
 
     // If the due date has already been set and was updated recently
-    if (currentTodo.updatedAt.dueDate && wasUpdatedRecently(currentTodo.updatedAt.dueDate)) {
-        const index = currentTodo.history.findIndex(change => {
-            return change.includes('date')
-        })
+    if (index >= 0 && wasUpdatedRecently(currentTodo.history[index].updatedAt)) {
         // Delete the existing change log.
         currentTodo.history.splice(index, 1)
     }
 
-    currentTodo.updatedAt.dueDate = moment().valueOf()
-    updateTodoHistory(currentTodo, `Due date changed to ${getDueDate(currentTodo)}. `)
+    updateTodoHistory(currentTodo, {
+        field: 'dueDate',
+        text: `Due date changed to ${getDueDate(currentTodo)}. `,
+        updatedAt: moment().valueOf()
+    })
 
     saveTodos(todos)
     renderTodos(todos, filters)
@@ -89,16 +92,20 @@ editDescription.addEventListener('input', e => {
 })
 
 editDescription.addEventListener('change', e => {
+     // Search the history array for a description change log
+     const index = currentTodo.history.findIndex(changeObj => changeObj.field === 'description')
+
     // If description was updated recently
-    if (currentTodo.updatedAt.description && wasUpdatedRecently(currentTodo.updatedAt.description)) {
-        const index = currentTodo.history.findIndex(change => {
-            return change.includes('description')
-        })
+    if (index >= 0 && wasUpdatedRecently(currentTodo.history[index].updatedAt)) {
         // Delete the existing change log.
         currentTodo.history.splice(index, 1)
     }
 
-    updateTodoHistory(currentTodo, 'Task description changed. ')
-    currentTodo.updatedAt.description = moment()
+    updateTodoHistory(currentTodo, {
+        field: 'description',
+        text: 'Task description changed. ',
+        updatedAt: moment().valueOf()
+    })
+
     fillEditModule(currentTodo)
 })
