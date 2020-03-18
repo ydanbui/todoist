@@ -170,11 +170,6 @@ const addTodo = todos => {
         label: [],
         dueDate: '',
         description: '',
-        updatedAt: {
-            title: null,
-            completed: null,
-            description: null
-        },
         history: [{
             field: 'created',
             text: 'Task created. ',
