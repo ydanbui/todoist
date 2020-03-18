@@ -80,6 +80,17 @@ completedTab.addEventListener('click', e => {
     renderTodos(todos, filters)
 })
 
+// Add new task button click event handler
+addTaskBtn.addEventListener('click', e => {
+    // Adds todos and passes in that todo to fill edit module
+    fillEditModule(addTodo(todos))
+    saveTodos(todos)
+    renderTodos(todos, filters)
+    renderBadges(todos)
+
+    displayEditModule()
+})
+
 // Sync data across windows
 window.addEventListener('storage', e => {
     if (e.key === 'todos') {

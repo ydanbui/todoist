@@ -8,51 +8,53 @@ const generateTimeString = momentArg => {
 }
 
 // Add an update to the todo's history
-const updateTodoHistory = (todo, updateString) => {
-    // Add given string argument to beginning of history property array
-    todo.history.unshift(updateString)
+const updateTodoHistory = (todo, updateObj) => {
+    // Add given update object argument to beginning of history property array
+    todo.history.unshift(updateObj)
 }
 
 // Add change to or remove change from todo history
 const changeCompletedHistory = todo => {
      if (todo.completed) {
         // if being marked completed
-        todo.updatedAt.completed = moment().valueOf()
-
-        // Add to the todo history array
-        updateTodoHistory(todo, 'Task completed. ')
+        // Add update object to the todo history array
+        updateTodoHistory(todo, {
+            field: 'completed',
+            text: 'Task completed. ',
+            updatedAt: moment().valueOf()
+        })
     } else {
         // if being marked incomplete
-        const index = todo.history.findIndex(update => {
+        const index = todo.history.findIndex(updateObj => {
             // Remove the completed update from task history
-            return update.includes('complete')
+            return updateObj.field === 'completed'
         })
         todo.history.splice(index, 1)
     }
 }
 
 // Add the time stamp to each history string relative to the moment of generation
-const appendTimestamp = (p, todo, change) => {
-    if (change.includes('created')) {
-        p.innerHTML = change + generateTimeString(moment(todo.createdAt))
-    } else if (change.includes('complete')) {
-        p.innerHTML = change + generateTimeString(moment(todo.updatedAt.completed))
-    } else if (change.includes('Title')) {
-        p.innerHTML = change + generateTimeString(moment(todo.updatedAt.title))
-    } else if (change.includes('date')) {
-        p.innerHTML = change + generateTimeString(moment(todo.updatedAt.dueDate))
-    } else if (change.includes('description')) {
-        p.innerHTML = change + generateTimeString(moment(todo.updatedAt.description))
+const appendTimestamp = (p, todo, changeObj) => {
+    if (changeObj.field === 'created') {
+        p.innerHTML = changeObj.text + generateTimeString(moment(changeObj.createdAt))
+    } else if (changeObj.field === 'completed') {
+        p.innerHTML = changeObj.text + generateTimeString(moment(changeObj.updatedAt))
+    } else if (changeObj.field === 'title') {
+        p.innerHTML = changeObj.text + generateTimeString(moment(changeObj.updatedAt))
+    } else if (changeObj.includes('date')) {
+        p.innerHTML = changeObj.text + generateTimeString(moment(changeObj.updatedAt))
+    } else if (changeObj.includes('description')) {
+        p.innerHTML = changeObj.text + generateTimeString(moment(changeObj.updatedAt))
     }
 }
 
 // Generate timeine dom elements in edit module
 const generateHistoryDOM = todo => {
     // loop through todo.history array and generate p elements for each update
-    todo.history.forEach(change => {
+    todo.history.forEach(changeObj => {
         const p = document.createElement('p') 
 
-        appendTimestamp(p, todo, change)
+        appendTimestamp(p, todo, changeObj)
         
         editHistory.appendChild(p)
     })

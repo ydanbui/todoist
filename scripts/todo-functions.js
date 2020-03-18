@@ -40,13 +40,11 @@ const generateTodoCheckboxDom = (todo) => {
     todoCheckbox.addEventListener('change', e => {
         todo.completed = !todo.completed
         changeCompletedHistory(todo)
-
         saveTodos(todos)
         
         //  Rerender so that card will be removed from inprogress/completed when checked/unchecked
         renderBadges(todos)
         renderTodos(todos, filters)
-
 
         // Fill the edit module with the current todo (may not be this one)
         fillEditModule(currentTodo)
@@ -172,14 +170,17 @@ const addTodo = todos => {
         label: [],
         dueDate: '',
         description: '',
-        createdAt: timestamp,
         updatedAt: {
             title: null,
             completed: null,
             dueDate: null,
             description: null
         },
-        history: ['Task created. ']
+        history: [{
+            field: 'created',
+            text: 'Task created. ',
+            createdAt: timestamp
+        }]
     }
 
     todos.push(currentTodo)

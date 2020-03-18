@@ -1,17 +1,5 @@
 'use strict'
 
-// Add new task button click event handler
-addTaskBtn.addEventListener('click', e => {
-    // Adds todos and passes in that todo to fill edit module
-    fillEditModule(addTodo(todos))
-    saveTodos(todos)
-    renderTodos(todos, filters)
-    renderBadges(todos)
-
-    displayEditModule()
-})
-
-
 editTitle.addEventListener('input', e => {
     currentTodo.title = e.target.value
     saveTodos(todos)
@@ -19,25 +7,31 @@ editTitle.addEventListener('input', e => {
 })
 
 editTitle.addEventListener('change', e => {
+    console.log(currentTodo.history)
     // If title is being changed
-    if (currentTodo.updatedAt.title) { // Check if title has been set
+    if (!(currentTodo.history.find(changeObj => changeObj.field === 'title'))) { // Check if title has been set
+        
         // Check if change log exists
-        const index = currentTodo.history.findIndex(change => {
-            return change.includes('Title')
+        const index = currentTodo.history.findIndex(changeObj => {
+            return changeObj.field === 'title'
         })
         
         // If index is -1, then changelog doesn't exist and we know the title has only been initialized once
         // Check if change log exists and if it was changed withint the last hour
-        if (index >= 0 && wasUpdatedRecently(currentTodo.updatedAt.title)) {
+        if (index >= 0 && wasUpdatedRecently(currentTodo.history[index].updatedAt)) {
             // If it was changed within last hour, override the change log rather than add another
             currentTodo.history.splice(index,1)
         }
-        updateTodoHistory(currentTodo, `Title changed to "${e.target.value}". `)
+        updateTodoHistory(currentTodo, {
+            field: 'title',
+            text: `Title changed to "${e.target.value}". `,
+            updatedAt: moment().valueOf()
+        })
+        // updateTodoHistory(currentTodo, `Title changed to "${e.target.value}". `)
         fillEditModule(currentTodo)
     } 
         
     // Don't add initial titling to history (skip of above code block if initializing)
-    currentTodo.updatedAt.title = moment().valueOf()
     saveTodos(todos)
 })
 
