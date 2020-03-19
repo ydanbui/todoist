@@ -54,6 +54,56 @@ class Todo {
             return moment(date).format('MMM D')
         }
     }
+
+    // Create the todo card element
+    generateCardDom(index) {
+        // Create the parent card
+        const todoCard = document.createElement('article')
+        todoCard.classList.add('todo__card')
+
+        // Create the checkbox
+        const todoCheckbox = this.generateCheckboxDom()
+        todoCard.appendChild(todoCheckbox)
+
+        // Create the text content
+        const todoTitle = document.createElement('span')
+        todoTitle.textContent = this.title ? this.title : 'Write task'
+        todoCard.appendChild(todoTitle)
+
+        // Create the due date element
+        const dateEl = document.createElement('span')
+        dateEl.textContent = this.getDueDate()
+        todoCard.appendChild(dateEl)
+
+        // Create the delete button
+        const deleteTodoEl = document.createElement('button')
+        deleteTodoEl.textContent = 'X'
+        deleteTodoEl.addEventListener('click', e => {
+            deleteTodo(todos, index)
+            saveTodos(todos)
+            renderTodos(todos, filters)
+            renderBadges(todos)
+
+            // If this todo is currently being edited, close that when this gets deleted
+            if (currentTodo === this) {
+                closeEditModule()
+            }
+        })
+        todoCard.appendChild(deleteTodoEl)
+
+        // Open edit modul if card is clicked
+        todoCard.addEventListener('click', function(e) {
+            // Don't open it if checkbox or icon button clicked
+            if (e.target !== this && e.target !== todoTitle && e.target !== dateEl) {
+                return
+            }
+            setEditTodo(this)
+            fillEditModule(this)
+            displayEditModule()
+        })
+
+        return todoCard
+    }
 }
 
 // Retrieve saved todos from localStorage if they exist
@@ -93,56 +143,6 @@ const deleteTodo = (todosArg, index) => {
     }
 }
 
-// Create the todo card element
-const generateTodoCardDom = (todo, index) => {
-    // Create the parent card
-    const todoCard = document.createElement('article')
-    todoCard.classList.add('todo__card')
-
-    // Create the checkbox
-    const todoCheckbox = todo.generateCheckboxDom()
-    todoCard.appendChild(todoCheckbox)
-
-    // Create the text content
-    const todoTitle = document.createElement('span')
-    todoTitle.textContent = todo.title ? todo.title : 'Write task'
-    todoCard.appendChild(todoTitle)
-
-    // Create the due date element
-    const dateEl = document.createElement('span')
-    dateEl.textContent = todo.getDueDate()
-    todoCard.appendChild(dateEl)
-
-    // Create the delete button
-    const deleteTodoEl = document.createElement('button')
-    deleteTodoEl.textContent = 'X'
-    deleteTodoEl.addEventListener('click', e => {
-        deleteTodo(todos, index)
-        saveTodos(todos)
-        renderTodos(todos, filters)
-        renderBadges(todos)
-
-        // If this todo is currently being edited, close that when this gets deleted
-        if (currentTodo === todo) {
-            closeEditModule()
-        }
-    })
-    todoCard.appendChild(deleteTodoEl)
-
-    // Open edit modul if card is clicked
-    todoCard.addEventListener('click', function(e) {
-        // Don't open it if checkbox or icon button clicked
-        if (e.target !== this && e.target !== todoTitle && e.target !== dateEl) {
-            return
-        }
-        setEditTodo(todo)
-        fillEditModule(todo)
-        displayEditModule()
-    })
-
-    return todoCard
-}
-
 // Render badges in header
 const renderBadges = todos => {
     const total = todos.length
@@ -178,7 +178,7 @@ const renderTodos = (todos, filters) => {
 
     // Print each todo in the filtered todo array
     filteredTodos.forEach((todo, index) => {
-        const todoCard = generateTodoCardDom(todo, index)
+        const todoCard = todo.generateCardDom(index)
         todoSection.appendChild(todoCard)
     })
 }
@@ -213,16 +213,3 @@ const closeEditModule = () => {
 const setEditTodo = todo => {
     currentTodo = todo
 }
-
-/*REMOVED since we can just rerender the todos each time the checkbox is changed
-// Functionality so that changing the checkbox on the in progress/completed tabs removes the todo card
-const handleTodoCardWhenChecked = (checkboxes) => {
-    // If todo is checked, it is completed and the card is removed from this tab
-    // If todo is unchecked, it is in progress and is removed from this tab
-
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('click', e => {
-            checkbox.parentElement.remove()
-        })
-    })
-}*/
