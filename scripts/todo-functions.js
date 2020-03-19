@@ -158,7 +158,7 @@ const getSavedTodos = () => {
             // When retrieving JSON, we need to re-create the prototype change to use the Todo methods
             const todos = JSON.parse(storedTodos)
 
-            // Re-create the chain for each todo object
+            // Re-create the prototype chain for each todo object
             todos.forEach(todo => {
                 Object.setPrototypeOf(todo, Todo.prototype)
             })
