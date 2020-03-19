@@ -104,6 +104,12 @@ class Todo {
 
         return todoCard
     }
+
+    // Add an update to the todo's history
+    addHistory(updateObj) {
+        // Add given update object argument to beginning of history property array
+        this.history.unshift(updateObj)
+    }
 }
 
 // Retrieve saved todos from localStorage if they exist

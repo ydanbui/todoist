@@ -7,18 +7,12 @@ const generateTimeString = momentArg => {
     })}</span>`
 }
 
-// Add an update to the todo's history
-const updateTodoHistory = (todo, updateObj) => {
-    // Add given update object argument to beginning of history property array
-    todo.history.unshift(updateObj)
-}
-
 // Add change to or remove change from todo history
 const changeCompletedHistory = todo => {
      if (todo.completed) {
         // if being marked completed
         // Add update object to the todo history array
-        updateTodoHistory(todo, {
+        todo.addHistory({
             field: 'completed',
             text: 'Task completed. ',
             updatedAt: moment().valueOf()
