@@ -36,12 +36,10 @@ const deleteTodo = (todosArg, index) => {
     // For deleting from the edit module. If we directly pass in a todo object, not the todos array
     if (!Array.isArray(todosArg)) {
         const ind = todos.findIndex( todo => todo === currentTodo)
-        console.log(ind)
         todos.splice(ind, 1)
-        console.log('deleting object from array')
-        return
+    } else {
+        todosArg.splice(index, 1)
     }
-    todosArg.splice(index, 1)
 }
 
 // Create todo checkbox DOM and add event handler to checkbox
