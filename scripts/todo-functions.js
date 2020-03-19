@@ -129,6 +129,16 @@ class Todo {
             this.history.splice(index, 1)
         }
     }
+
+    // Generate timeine dom elements in edit module
+    generateHistoryDOM() {
+        // loop through todo.history array and generate p elements for each update
+        this.history.forEach(changeObj => {
+            const p = document.createElement('p') 
+            p.innerHTML = changeObj.text + getTimeSinceUpdate(changeObj)
+            editHistory.appendChild(p)
+        })
+    }
 }
 
 class Update {
@@ -229,7 +239,7 @@ const fillEditModule = currentTodo => {
     editTitle.value = currentTodo.title
     editDate.value = currentTodo.dueDate
     editDescription.value = currentTodo.description
-    generateHistoryDOM(currentTodo)
+    currentTodo.generateHistoryDOM()
 }
 
 // Display edit module
