@@ -14,6 +14,7 @@ class Todo {
             createdAt: moment().valueOf()
         }]
     }
+
     // Create todo checkbox DOM and add event handler to checkbox
     generateCheckboxDom() {
         // Create the checkbox
@@ -38,9 +39,24 @@ class Todo {
 
         return todoCheckbox
     }
+
+    // Function to translate the due date into formated string to display
+    getDueDate() {
+        const date = this.dueDate
+        if (!date) {
+            // if the due daye has not been set
+            return date
+        } else if (moment(date).year() !== moment().year()) {
+            // If the due date is not this year, display the year
+            return moment(date).format('MMM D YYYY')
+        } else {
+            // don't display the year
+            return moment(date).format('MMM D')
+        }
+    }
 }
 
-// Retried saved todos from localStorage if they exist
+// Retrieve saved todos from localStorage if they exist
 const getSavedTodos = () => {
     const storedTodos = localStorage.getItem('todos')
     
@@ -77,46 +93,6 @@ const deleteTodo = (todosArg, index) => {
     }
 }
 
-// Create todo checkbox DOM and add event handler to checkbox
-const generateTodoCheckboxDom = (todo) => {
-    // Create the checkbox
-    const todoCheckbox = document.createElement('input')
-    todoCheckbox.type = 'checkbox'
-    todoCheckbox.classList.add('todo__checkbox')
-    todoCheckbox.checked = todo.completed
- 
-    // Event handler for checking checkbox
-    todoCheckbox.addEventListener('change', e => {
-        todo.completed = !todo.completed
-        changeCompletedHistory(todo)
-        saveTodos(todos)
-        
-        //  Rerender so that card will be removed from inprogress/completed when checked/unchecked
-        renderBadges(todos)
-        renderTodos(todos, filters)
-
-        // Fill the edit module with the current todo (may not be this one)
-        fillEditModule(currentTodo)
-    })
-
-    return todoCheckbox
-}
-
-// Function to translate the due daye into formated string to display
-const getDueDate = todo => {
-    if (!todo.dueDate) {
-         // if the due daye has not been set
-        return todo.dueDate
-    // } else if (moment(todo.dueDate).valueOf() > moment().add(1, 'y').valueOf()) {
-    } else if (moment(todo.dueDate).year() !== moment().year()) {
-        // If the due date is not this year, display the year
-        return moment(todo.dueDate).format('MMM D YYYY')
-    } else {
-        // don't display the year
-        return moment(todo.dueDate).format('MMM D')
-    }
-}
-
 // Create the todo card element
 const generateTodoCardDom = (todo, index) => {
     // Create the parent card
@@ -134,7 +110,7 @@ const generateTodoCardDom = (todo, index) => {
 
     // Create the due date element
     const dateEl = document.createElement('span')
-    dateEl.textContent = getDueDate(todo)
+    dateEl.textContent = todo.getDueDate()
     todoCard.appendChild(dateEl)
 
     // Create the delete button
@@ -210,9 +186,7 @@ const renderTodos = (todos, filters) => {
 // Add new todo to end of todo array
 const addTodo = todos => {
     currentTodo = new Todo()
-
     todos.push(currentTodo)
-
     return currentTodo
 }
 

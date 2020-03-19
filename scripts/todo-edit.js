@@ -77,7 +77,7 @@ editDate.addEventListener('input', e => {
 
     updateTodoHistory(currentTodo, {
         field: 'dueDate',
-        text: `Due date changed to ${getDueDate(currentTodo)}. `,
+        text: `Due date changed to ${currentTodo.getDueDate()}. `,
         updatedAt: moment().valueOf()
     })
 
