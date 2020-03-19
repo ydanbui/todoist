@@ -123,7 +123,7 @@ const generateTodoCardDom = (todo, index) => {
     // Open edit modul if card is clicked
     todoCard.addEventListener('click', function(e) {
         // Don't open it if checkbox or icon button clicked
-        if (e.target !== this && e.target !== todoTitle) {
+        if (e.target !== this && e.target !== todoTitle && e.target !== dateEl) {
             return
         }
         setEditTodo(todo)
