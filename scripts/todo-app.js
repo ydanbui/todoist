@@ -12,23 +12,6 @@ let todos = getSavedTodos()
 // Current todo to be displayed by edit module
 let currentTodo = null
 
-// todos = [{
-//     text: 'You have no tasks! Add one!',
-//     completed: false,
-//     label: [],
-//     dueDate: 'Feb 28'
-// }, {
-//     text: 'Second task!',
-//     completed: false,
-//     label: [],
-//     dueDate: 'Feb 28'
-// }, {
-//     text: 'You have aid!',
-//     completed: true,
-//     label: [],
-//     dueDate: 'Feb 28'
-// }]
-
 const labelss = [{
     name: 'Design',
     color: '#FFB45e'
@@ -38,6 +21,8 @@ const labelss = [{
 }]
 
 const labels = getSavedLabels()
+
+const labelColors = ['#FFB45E', '#B7DDAC','#B1DBF7', '#FFF', '#FFF', '#FFF', '#FFF', '#FFF']
 
 const filters = {
     searchText: '',

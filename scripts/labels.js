@@ -7,7 +7,8 @@ const createLabelBtn = document.querySelector('.btn--create-label')
 class Label {
     constructor(numLabels) {
         this.name = `Label ${numLabels > 0 ? numLabels + 1 : ''}`,
-        this.color = '#FFF'
+        // Set colors according to labelColors array. Loop through it
+        this.color = labelColors[numLabels % 8]
     }
 
     // Generate the label bullet point
