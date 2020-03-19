@@ -20,20 +20,13 @@ editTitle.addEventListener('change', e => {
             // If it was changed within last hour, override the change log rather than add another
             currentTodo.history.splice(index,1)
         }
-        currentTodo.addHistory({
-            field: 'title',
-            text: `Title changed to "${e.target.value}". `,
-            updatedAt: moment().valueOf()
-        })
+
+        currentTodo.addHistory(new Update('title', `Title changed to "${e.target.value}". `))
         
         fillEditModule(currentTodo)
     } else {
         // If this is the first time we are naming task or we haven't changed the name recently, them create a new log without removing the previous
-        currentTodo.addHistory({
-            field: 'title',
-            text: `Title changed to "${e.target.value}". `,
-            updatedAt: moment().valueOf()
-        }) 
+        currentTodo.addHistory(new Update('title', `Title changed to "${e.target.value}". `))
     }
     
     // Don't add initial titling to history (skip of above code block if initializing)
@@ -75,11 +68,7 @@ editDate.addEventListener('input', e => {
         currentTodo.history.splice(index, 1)
     }
 
-    currentTodo.addHistory({
-        field: 'dueDate',
-        text: `Due date changed to ${currentTodo.getDueDate()}. `,
-        updatedAt: moment().valueOf()
-    })
+    currentTodo.addHistory(new Update('dueDate', `Due date changed to ${currentTodo.getDueDate()}. `))
 
     saveTodos(todos)
     renderTodos(todos, filters)
@@ -101,11 +90,7 @@ editDescription.addEventListener('change', e => {
         currentTodo.history.splice(index, 1)
     }
 
-    currentTodo.addHistory({
-        field: 'description',
-        text: 'Task description changed. ',
-        updatedAt: moment().valueOf()
-    })
+    currentTodo.addHistory(new Update ('description', 'Task description changed. '))
 
     fillEditModule(currentTodo)
 })
