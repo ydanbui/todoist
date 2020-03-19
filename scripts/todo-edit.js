@@ -42,7 +42,7 @@ editTitle.addEventListener('change', e => {
 
 editComplete.addEventListener('click', e => {
     currentTodo.completed = !currentTodo.completed
-    changeCompletedHistory(currentTodo)
+    currentTodo.changeCompletedHistory()
 
     saveTodos(todos)
     renderTodos(todos, filters)

@@ -22,11 +22,13 @@ class Todo {
         todoCheckbox.type = 'checkbox'
         todoCheckbox.classList.add('todo__checkbox')
         todoCheckbox.checked = this.completed
+
+        const thisTodo = this
     
         // Event handler for checking checkbox
         todoCheckbox.addEventListener('change', e => {
-            this.completed = !this.completed
-            changeCompletedHistory(this)
+            thisTodo.completed = !thisTodo.completed
+            thisTodo.changeCompletedHistory()
             saveTodos(todos)
             
             //  Rerender so that card will be removed from inprogress/completed when checked/unchecked
@@ -91,8 +93,8 @@ class Todo {
         })
         todoCard.appendChild(deleteTodoEl)
 
-        let thisTodo = this
-        // Open edit modul if card is clicked
+        const thisTodo = this
+        // Open edit modal if card is clicked
         todoCard.addEventListener('click', function(e) {
             // Don't open it if checkbox or icon button clicked
             if (e.target !== this && e.target !== todoTitle && e.target !== dateEl) {
@@ -111,12 +113,26 @@ class Todo {
         // Add given update object argument to beginning of history property array
         this.history.unshift(updateObj)
     }
+
+    // Add change to or remove change from todo history
+    changeCompletedHistory() {
+        if (this.completed) {
+            // if being marked completed
+            // Add update object to the todo history array
+            this.addHistory(new Update('completed', 'Task completed. '))
+        } else {
+            // if being marked incomplete
+            const index = this.history.findIndex(updateObj => {
+                // Remove the completed update from task history
+                return updateObj.field === 'completed'
+            })
+            this.history.splice(index, 1)
+        }
+    }
 }
 
 class Update {
     constructor(field, text) {
-        debugger
-        console.log('construct update')
         this.field = field,
         this.text = text,
         this.updatedAt = moment().valueOf()

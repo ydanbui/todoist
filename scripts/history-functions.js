@@ -7,24 +7,8 @@ const generateTimeString = momentArg => {
     })}</span>`
 }
 
-// Add change to or remove change from todo history
-const changeCompletedHistory = todo => {
-     if (todo.completed) {
-        // if being marked completed
-        // Add update object to the todo history array
-        todo.addHistory(new Update('completed', 'Task completed. '))
-    } else {
-        // if being marked incomplete
-        const index = todo.history.findIndex(updateObj => {
-            // Remove the completed update from task history
-            return updateObj.field === 'completed'
-        })
-        todo.history.splice(index, 1)
-    }
-}
-
 // Add the time stamp to each history string relative to the moment of generation
-const appendTimestamp = (p, todo, changeObj) => {
+const appendTimestamp = (p, changeObj) => {
     if (changeObj.field === 'created') {
         p.innerHTML = changeObj.text + generateTimeString(moment(changeObj.createdAt))
     } else if (changeObj.field === 'completed') {
@@ -45,7 +29,7 @@ const generateHistoryDOM = todo => {
     todo.history.forEach(changeObj => {
         const p = document.createElement('p') 
 
-        appendTimestamp(p, todo, changeObj)
+        appendTimestamp(p, changeObj)
         
         editHistory.appendChild(p)
     })
