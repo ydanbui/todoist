@@ -51,8 +51,6 @@ renderLabels(labels)
 
 // Search bar input event handler
 searchBar.addEventListener('input', e => {
-    console.log(e.target.value)
-
     // Set filter to be search input
     filters.searchText = e.target.value
 
