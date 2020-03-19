@@ -91,14 +91,15 @@ class Todo {
         })
         todoCard.appendChild(deleteTodoEl)
 
+        let thisTodo = this
         // Open edit modul if card is clicked
         todoCard.addEventListener('click', function(e) {
             // Don't open it if checkbox or icon button clicked
             if (e.target !== this && e.target !== todoTitle && e.target !== dateEl) {
                 return
             }
-            setEditTodo(this)
-            fillEditModule(this)
+            setEditTodo(thisTodo)
+            fillEditModule(thisTodo)
             displayEditModule()
         })
 
@@ -109,6 +110,16 @@ class Todo {
     addHistory(updateObj) {
         // Add given update object argument to beginning of history property array
         this.history.unshift(updateObj)
+    }
+}
+
+class Update {
+    constructor(field, text) {
+        debugger
+        console.log('construct update')
+        this.field = field,
+        this.text = text,
+        this.updatedAt = moment().valueOf()
     }
 }
 

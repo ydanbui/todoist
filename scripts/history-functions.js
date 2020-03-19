@@ -12,11 +12,7 @@ const changeCompletedHistory = todo => {
      if (todo.completed) {
         // if being marked completed
         // Add update object to the todo history array
-        todo.addHistory({
-            field: 'completed',
-            text: 'Task completed. ',
-            updatedAt: moment().valueOf()
-        })
+        todo.addHistory(new Update('completed', 'Task completed. '))
     } else {
         // if being marked incomplete
         const index = todo.history.findIndex(updateObj => {
@@ -45,6 +41,7 @@ const appendTimestamp = (p, todo, changeObj) => {
 // Generate timeine dom elements in edit module
 const generateHistoryDOM = todo => {
     // loop through todo.history array and generate p elements for each update
+    console.log(todo)
     todo.history.forEach(changeObj => {
         const p = document.createElement('p') 
 
