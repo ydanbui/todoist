@@ -1,5 +1,21 @@
 'use strict'
 
+class Todo {
+    constructor() {
+        this.id = uuidv4(),
+        this.title ='',
+        this.completed = false,
+        this.label = [],
+        this.dueDate = '',
+        this.description = '',
+        this.history = [{
+            field: 'created',
+            text: 'Task created. ',
+            createdAt: moment().valueOf()
+        }]
+    }
+}
+
 // Retried saved todos from localStorage if they exist
 const getSavedTodos = () => {
     const storedTodos = localStorage.getItem('todos')
@@ -160,22 +176,7 @@ const renderTodos = (todos, filters) => {
 
 // Add new todo to end of todo array
 const addTodo = todos => {
-    // const id = uuidv4()
-    const timestamp = moment().valueOf()
-
-    currentTodo = {
-        id: uuidv4(),
-        title:'',
-        completed: false,
-        label: [],
-        dueDate: '',
-        description: '',
-        history: [{
-            field: 'created',
-            text: 'Task created. ',
-            createdAt: timestamp
-        }]
-    }
+    currentTodo = new Todo()
 
     todos.push(currentTodo)
 
