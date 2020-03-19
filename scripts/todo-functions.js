@@ -14,6 +14,30 @@ class Todo {
             createdAt: moment().valueOf()
         }]
     }
+    // Create todo checkbox DOM and add event handler to checkbox
+    generateCheckboxDom() {
+        // Create the checkbox
+        const todoCheckbox = document.createElement('input')
+        todoCheckbox.type = 'checkbox'
+        todoCheckbox.classList.add('todo__checkbox')
+        todoCheckbox.checked = this.completed
+    
+        // Event handler for checking checkbox
+        todoCheckbox.addEventListener('change', e => {
+            this.completed = !this.completed
+            changeCompletedHistory(this)
+            saveTodos(todos)
+            
+            //  Rerender so that card will be removed from inprogress/completed when checked/unchecked
+            renderBadges(todos)
+            renderTodos(todos, filters)
+
+            // Fill the edit module with the current todo (may not be this one)
+            fillEditModule(currentTodo)
+        })
+
+        return todoCheckbox
+    }
 }
 
 // Retried saved todos from localStorage if they exist
@@ -21,7 +45,18 @@ const getSavedTodos = () => {
     const storedTodos = localStorage.getItem('todos')
     
     try {
-        return storedTodos ? JSON.parse(storedTodos) : []
+        if (storedTodos) { 
+            // When retrieving JSON, we need to re-create the prototype change to use the Todo methods
+            const todos = JSON.parse(storedTodos)
+
+            // Re-create the chain for each todo object
+            todos.forEach(todo => {
+                Object.setPrototypeOf(todo, Todo.prototype)
+            })
+            return todos
+        } else {
+            return []
+        }
     } catch(e) {
         return []
     }
@@ -89,7 +124,7 @@ const generateTodoCardDom = (todo, index) => {
     todoCard.classList.add('todo__card')
 
     // Create the checkbox
-    const todoCheckbox = generateTodoCheckboxDom(todo)
+    const todoCheckbox = todo.generateCheckboxDom()
     todoCard.appendChild(todoCheckbox)
 
     // Create the text content
