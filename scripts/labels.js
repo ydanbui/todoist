@@ -47,7 +47,7 @@ class Label {
         return labelText
     }
 
-    generateMenuDom() {
+    generateMenuDom(label) {
         const container = document.createElement('div')
         container.classList.add('menu')
 
@@ -57,14 +57,34 @@ class Label {
 
         const ul = document.createElement('ul')
         ul.classList.add('menu__content')
-        ul.innerHTML = '<li>Set color</li><li>Delete label</li>'
+        // ul.innerHTML = '<li>Set color</li><li class = "deleteEl">Delete label</li>'
+        
+        const setColorEl = document.createElement('li')
+        setColorEl.textContent = 'Set color'
 
+        const deleteLabelEl = document.createElement('li')
+        deleteLabelEl.textContent = 'Delete label'
 
+        deleteLabelEl.addEventListener('click', e=> {
+            const ind = labels.findIndex(el => el === label)
+            deleteLabel(labels, ind)
+            saveLabels(labels)
+            console.log(labels)
+            renderLabels(labels)
+        })
+
+        ul.appendChild(setColorEl)
+        ul.appendChild(deleteLabelEl)
+        
         container.appendChild(btn)
         container.appendChild(ul)
 
         return container
     }
+}
+
+const deleteLabel = (labels, index) => {
+    labels.splice(index, 1)
 }
 
 // Render all created labels
@@ -74,15 +94,17 @@ const renderLabels = labels => {
         sidebarLabels.innerHTML = ''
         // const ul = document.createElement('ul')
 
-        labels.forEach(label => {
+        labels.forEach((label, index) => {
             const labelEl = document.createElement('li')
             labelEl.classList.add('sidebar__label')
             
             labelEl.appendChild(label.generateBulletDom())
             labelEl.appendChild(label.generateTextDom())
-            labelEl.appendChild(label.generateMenuDom())
+            labelEl.appendChild(label.generateMenuDom(label))
             sidebarLabels.appendChild(labelEl)
         })
+    } else {
+        sidebarLabels.innerHTML = '<p>Create labels to organize your tasks</p>'
     }
 }
 

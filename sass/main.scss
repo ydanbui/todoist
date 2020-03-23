@@ -1,6 +1,10 @@
 @import 'reset';
 @import 'variables';
 
+.show {
+    display: block;
+}
+
 body {
     display: grid;
     grid-template-columns: 251px 1fr;
