@@ -72,4 +72,21 @@ main {
   background-color: green;
   display: none;
 }
+
+.menu {
+  display: inline-block;
+  position: relative;
+}
+
+.menu__btn {
+  cursor: pointer;
+}
+
+.menu__content {
+  list-style: none;
+  background-color: #fff;
+  color: #19223B;
+  position: absolute;
+  min-width: 100px;
+}
 /*# sourceMappingURL=main.css.map */

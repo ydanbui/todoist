@@ -247,6 +247,10 @@ const displayEditModule = () => {
     editModule.style.display = "block"
 }
 
+const toggleDisplay = (el) => {
+    el.classList.toggle('show')
+} 
+
 // Close the edit module
 const closeEditModule = () => {
     editModule.style.display = "none"

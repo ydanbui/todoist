@@ -47,6 +47,24 @@ class Label {
         return labelText
     }
 
+    generateMenuDom() {
+        const container = document.createElement('div')
+        container.classList.add('menu')
+
+        const btn = document.createElement('button')
+        btn.classList.add('menu__btn')
+        btn.textContent = '...'
+
+        const ul = document.createElement('ul')
+        ul.classList.add('menu__content')
+        ul.innerHTML = '<li>Set color</li><li>Delete label</li>'
+
+
+        container.appendChild(btn)
+        container.appendChild(ul)
+
+        return container
+    }
 }
 
 // Render all created labels
@@ -62,6 +80,7 @@ const renderLabels = labels => {
             
             labelEl.appendChild(label.generateBulletDom())
             labelEl.appendChild(label.generateTextDom())
+            labelEl.appendChild(label.generateMenuDom())
             sidebarLabels.appendChild(labelEl)
         })
     }

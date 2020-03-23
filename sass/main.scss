@@ -58,3 +58,21 @@ main {
     background-color: green;
     display: none;
 }
+
+.menu {
+    display: inline-block;
+    position: relative;
+
+    &__btn {
+        cursor: pointer;
+    }
+
+    &__content {
+        list-style: none;
+        background-color: #fff;
+        color: #19223B;
+
+        position: absolute;
+        min-width: 100px;
+    }
+}
