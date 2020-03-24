@@ -86,11 +86,22 @@ main {
   cursor: pointer;
 }
 
-.menu__content {
+.menu__list {
   list-style: none;
   background-color: #fff;
   color: #19223B;
   position: absolute;
   min-width: 100px;
+}
+
+.menu__list li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.menu__color {
+  width: 20px;
+  height: 20px;
 }
 /*# sourceMappingURL=main.css.map */

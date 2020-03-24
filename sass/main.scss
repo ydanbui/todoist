@@ -71,12 +71,22 @@ main {
         cursor: pointer;
     }
 
-    &__content {
+    &__list {
         list-style: none;
         background-color: #fff;
         color: #19223B;
 
         position: absolute;
         min-width: 100px;
+
+        li {
+            display: flex;
+        }
+
+    }
+
+    &__color {
+        width: 20px;
+        height: 20px;
     }
 }

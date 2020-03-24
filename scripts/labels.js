@@ -20,6 +20,7 @@ class Label {
         return bullet
     }
 
+    // Generate the label sidebar text
     generateTextDom() {
         const labelText = document.createElement('div')
         labelText.classList.add('sidebar__label-name')
@@ -47,20 +48,61 @@ class Label {
         return labelText
     }
 
+    // Generate the label menu
     generateMenuDom(label) {
-        const container = document.createElement('div')
-        container.classList.add('menu')
+        const menu = document.createElement('div')
+        menu.classList.add('menu')
 
-        const btn = document.createElement('button')
-        btn.classList.add('menu__btn')
-        btn.textContent = '...'
+        const menuBtn = document.createElement('button')
+        menuBtn.classList.add('menu__btn')
+        menuBtn.textContent = '...'
 
-        const ul = document.createElement('ul')
-        ul.classList.add('menu__content')
-        // ul.innerHTML = '<li>Set color</li><li class = "deleteEl">Delete label</li>'
+        const menuList = document.createElement('ul')
+        menuList.classList.add('menu__list')
         
         const setColorEl = document.createElement('li')
-        setColorEl.textContent = 'Set color'
+        const colorEl = document.createElement('div')
+        colorEl.style.backgroundColor = label.color
+        colorEl.classList.add('menu__color')
+
+        setColorEl.appendChild(colorEl)
+        const span = document.createElement('span')
+        span.textContent = 'Set color'
+        setColorEl.appendChild(span)
+
+        setColorEl.addEventListener('click', e => {
+            debugger
+            menuList.innerHTML = ''
+
+            const back = document.createElement('btn')
+            back.textContent = 'b'
+            
+            // Put bottom two blocks into function
+            const setColorEl = document.createElement('li')
+            const colorEl = document.createElement('div')
+            colorEl.style.backgroundColor = label.color
+            colorEl.classList.add('menu__color')
+    
+            const span = document.createElement('span')
+            span.textContent = 'Set color'
+            
+            setColorEl.appendChild(back)
+            setColorEl.appendChild(colorEl)
+            setColorEl.appendChild(span)
+
+            const colorsEl = document.createElement('li')
+
+
+            labelColors.forEach(color => {
+                const labelColorsEl = document.createElement('div')
+                labelColorsEl.classList.add('menu__color')
+                labelColorsEl.style.backgroundColor = color
+                colorsEl.appendChild(labelColorsEl)
+            })
+            
+            menuList.appendChild(setColorEl)
+            menuList.appendChild(colorsEl)
+        })
 
         const deleteLabelEl = document.createElement('li')
         deleteLabelEl.textContent = 'Delete label'
@@ -73,13 +115,13 @@ class Label {
             renderLabels(labels)
         })
 
-        ul.appendChild(setColorEl)
-        ul.appendChild(deleteLabelEl)
+        menuList.appendChild(setColorEl)
+        menuList.appendChild(deleteLabelEl)
         
-        container.appendChild(btn)
-        container.appendChild(ul)
+        menu.appendChild(menuBtn)
+        menu.appendChild(menuList)
 
-        return container
+        return menu
     }
 }
 

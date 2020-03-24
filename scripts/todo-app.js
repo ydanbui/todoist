@@ -22,7 +22,7 @@ const labelss = [{
 
 const labels = getSavedLabels()
 
-const labelColors = ['#FFB45E', '#B7DDAC','#B1DBF7', '#FFF', '#FFF', '#FFF', '#FFF', '#FFF']
+const labelColors = ['#FFB45E', '#B7DDAC','#B1DBF7', 'purple', 'red', 'pink', 'blue', 'yellow']
 
 const filters = {
     searchText: '',
