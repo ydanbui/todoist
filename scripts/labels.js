@@ -75,12 +75,14 @@ const fillLabelMenu = (menuList, label) => {
     setColorEl.innerHTML = `<div class = "menu__color" style = "background-color: ${label.color};"></div><span>Set color</span>`
     
 
+    // Event listener to change menu when set color is clicked
     setColorEl.addEventListener('click', e => {
         menuList.innerHTML = ''
 
         const backBtn = document.createElement('button')
         backBtn.textContent = 'b'
 
+        // Move back to previous menu when clicked
         backBtn.addEventListener('click', e => {
             menuList.innerHTML = ''
             fillLabelMenu(menuList, label)
@@ -97,16 +99,22 @@ const fillLabelMenu = (menuList, label) => {
         setColorEl.appendChild(backBtn)
         setColorEl.appendChild(colorDiv)
         setColorEl.appendChild(spanEl)
-
-        // setColorEl.innerHTML = `<div class = "menu__color" style = "background-color: ${label.color};"></div><span>Set color</span>`
         
         const colorsEl = document.createElement('li')
 
+        // Loop through label colors and render them
         labelColors.forEach(color => {
             const labelColorsEl = document.createElement('div')
             labelColorsEl.classList.add('menu__color')
             labelColorsEl.style.backgroundColor = color
             colorsEl.appendChild(labelColorsEl)
+            
+            // Change the selected label's color when new color is clicked
+            labelColorsEl.addEventListener('click', e => {
+                label.color = color
+                saveLabels(labels)
+                renderLabels(labels)
+            })
         })
         
         menuList.appendChild(setColorEl)
