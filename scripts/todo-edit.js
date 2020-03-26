@@ -82,17 +82,30 @@ editTodoLabel.addEventListener('focus', e => {
         // Don't generate menu if clicked when there's text entered
         return
     }
+
+    // Clear menu elements
     editTodoUL.innerHTML = ''
+
+    generateAddLabelMenuDOM(labels, editTodoUL, e)
+    /*
+    // Generate a menu element for each created label
     labels.forEach(label => {
         const li = document.createElement('li')
         li.textContent = label.name
         editTodoUL.appendChild(li)
     })
+    */
 })
 
-// Filters label menu on uber input
+// Filters label menu on user input
 editTodoLabel.addEventListener('input', e => {
+    // Clear menu elements
     editTodoUL.innerHTML = ''
+
+    generateAddLabelMenuDOM(labels, editTodoUL, e)
+
+    /*
+    // Generate a menu element for each created label that matches user input
     labels.forEach(label => {
         if (label.name.toLowerCase().startsWith(e.target.value.toLowerCase())) {
             const li = document.createElement('li')
@@ -101,6 +114,7 @@ editTodoLabel.addEventListener('input', e => {
         }
     })
 
+    // Check if there are labels that exactly match user input (if there array will have elements)
     const arr = labels.filter(label => label.name.trim().toLowerCase() === e.target.value.trim().toLowerCase())
 
     // If there are no labels matching the user's input
@@ -110,6 +124,7 @@ editTodoLabel.addEventListener('input', e => {
         li.textContent = `Create new ${e.target.value} label`
         editTodoUL.appendChild(li)
     }
+    */
 })
 
 editDescription.addEventListener('input', e => {

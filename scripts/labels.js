@@ -5,10 +5,11 @@ const sidebarLabels = document.querySelector('.sidebar__labels')
 const createLabelBtn = document.querySelector('.btn--create-label')
 
 class Label {
-    constructor(numLabels) {
-        this.name = `Label ${numLabels > 0 ? numLabels + 1 : ''}`,
-        // Set colors according to labelColors array. Loop through it
-        this.color = labelColors[numLabels % 8]
+    // Default name follows the Label, Label 2, Label 3 pattern
+    constructor(name = `Label ${labels.length > 0 ? labels.length + 1 : ''}`) {
+            this.name = name,
+            // Set colors according to labelColors array. Loop through it
+            this.color = labelColors[labels.length % 8]
     }
 
     // Generate the label bullet point
@@ -204,8 +205,8 @@ const highlight = el => {
 
 // Add new label and highlight it when button clicked
 createLabelBtn.addEventListener('click', e => {
-    const length = labels.length
-    labels.push(new Label(length))
+    // const length = labels.length
+    labels.push(new Label())
     saveLabels(labels)
     renderLabels(labels)
 

@@ -260,3 +260,58 @@ const closeEditModule = () => {
 const setEditTodo = todo => {
     currentTodo = todo
 }
+
+// Generate the individual add abel menu elements
+const generateLabelLiDOM = (label) => {
+    const li = document.createElement('li')
+    li.textContent = label.name
+    li.addEventListener('click', e => {
+        // Add the correct label when the menu item is clicked
+        currentTodo.label.push(labels.find(lab => lab.name === label.name))
+        saveTodos(todos)
+        renderTodos(todos, filters)
+    })
+    editTodoUL.appendChild(li)
+}
+
+// Generate menu for add label to todo in edit module
+const generateAddLabelMenuDOM = (labels, editTodoUL, e) => {
+    // If user has not entered input
+    if (!e.target.value.trim()) {
+        // Generate a menu element for each created label
+        labels.forEach(label => {
+            generateLabelLiDOM(label)
+        })
+    } else {
+        // Generate a menu element for each created label that matches user input
+        labels.forEach(label => {
+            if (label.name.toLowerCase().trim().startsWith(e.target.value.toLowerCase().trim())) {
+                generateLabelLiDOM(label)    
+            }
+        })
+
+        // Check if there are labels that exactly match user input (if there array will have elements)
+        const arr = labels.filter(label => label.name.trim().toLowerCase() === e.target.value.trim().toLowerCase())
+
+        // If there are no labels matching the user's input
+        if (arr.length === 0) {
+            console.log('no matching label')
+            const li = document.createElement('li')
+            li.textContent = `Create new ${e.target.value} label`
+
+            // Click event for adding new label
+            li.addEventListener('click', () => {
+                // Create new label based on users input
+                labels.push(new Label(e.target.value))
+                saveLabels(labels)
+                renderLabels(labels)
+
+                // currentTodo.label.push(labels.find(lab => lab.name === label.name))
+                saveTodos(todos)
+                renderTodos(todos, filters)
+            })
+
+            editTodoUL.appendChild(li)
+        }
+    }
+}
