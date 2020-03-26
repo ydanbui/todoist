@@ -73,7 +73,7 @@ class Label {
 const fillLabelMenu = (menuList, label) => {
     const setColorEl = document.createElement('li')
     setColorEl.innerHTML = `<div class = "menu__color" style = "background-color: ${label.color};"></div><span>Set color</span>`
-    
+  
 
     // Event listener to change menu when set color is clicked
     setColorEl.addEventListener('click', e => {

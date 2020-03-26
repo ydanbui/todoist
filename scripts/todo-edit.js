@@ -75,6 +75,43 @@ editDate.addEventListener('input', e => {
     fillEditModule(currentTodo)
 })
 
+// Generate label menu when user clicks to add label
+editTodoLabel.addEventListener('focus', e => {
+    console.log('focus event fire')
+    if (e.target.value) {
+        // Don't generate menu if clicked when there's text entered
+        return
+    }
+    editTodoUL.innerHTML = ''
+    labels.forEach(label => {
+        const li = document.createElement('li')
+        li.textContent = label.name
+        editTodoUL.appendChild(li)
+    })
+})
+
+// Filters label menu on uber input
+editTodoLabel.addEventListener('input', e => {
+    editTodoUL.innerHTML = ''
+    labels.forEach(label => {
+        if (label.name.toLowerCase().startsWith(e.target.value.toLowerCase())) {
+            const li = document.createElement('li')
+            li.textContent = label.name
+            editTodoUL.appendChild(li)
+        }
+    })
+
+    const arr = labels.filter(label => label.name.trim().toLowerCase() === e.target.value.trim().toLowerCase())
+
+    // If there are no labels matching the user's input
+    if (arr.length === 0) {
+        console.log('no matching label')
+        const li = document.createElement('li')
+        li.textContent = `Create new ${e.target.value} label`
+        editTodoUL.appendChild(li)
+    }
+})
+
 editDescription.addEventListener('input', e => {
     currentTodo.description = e.target.value
     saveTodos(todos)
