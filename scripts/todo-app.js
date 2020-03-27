@@ -10,7 +10,7 @@
 let todos = getSavedTodos()
 
 // Current todo to be displayed by edit module
-let currentTodo = null
+let currentTodo = todos[0]
 
 const labelss = [{
     name: 'Design',

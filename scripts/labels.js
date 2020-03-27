@@ -7,6 +7,7 @@ const createLabelBtn = document.querySelector('.btn--create-label')
 class Label {
     // Default name follows the Label, Label 2, Label 3 pattern
     constructor(name = `Label ${labels.length > 0 ? labels.length + 1 : ''}`) {
+            this.id = uuidv4(),
             this.name = name,
             // Set colors according to labelColors array. Loop through it
             this.color = labelColors[labels.length % 8]
@@ -33,6 +34,7 @@ class Label {
             console.log('todos saved and rendered')
             saveTodos(todos)
             renderTodos(todos, filters)
+            fillEditModule(currentTodo)
         })
 
         const currentLabel = this
@@ -133,6 +135,7 @@ const fillLabelMenu = (menuList, label) => {
                 renderLabels(labels)
                 saveTodos(todos)
                 renderTodos(todos, filters)
+                fillEditModule(currentTodo)
             })
         })
         
@@ -163,12 +166,13 @@ const deleteLabel = (labels, index) => {
         // If the todo has a label
         if (todo.label.length > 0) {
             // Check to see if it has the deleted label
-            const labelIndex = todo.label.findIndex(lab => lab === labels[index])
+            const labelIndex = todo.label.findIndex(lab => lab.id === labels[index].id)
             if (labelIndex > -1) {
                 todo.label.splice(labelIndex, 1)
             }
             saveTodos(todos)
             renderTodos(todos, filters)
+            fillEditModule(currentTodo)
         }
     })
 

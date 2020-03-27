@@ -79,12 +79,7 @@ class Todo {
 
             // Loop through labels and generate badge
             this.label.forEach(lab => {
-                const labelEl = document.createElement('div')
-                labelEl.classList.add('todo__label')
-                labelEl.textContent = lab.name
-                labelEl.style.backgroundColor = lab.color
-
-                labelsContainer.appendChild(labelEl)
+                generateLabelBadgeDom(labelsContainer, lab)
             })
 
             todoCard.appendChild(labelsContainer)
@@ -253,12 +248,32 @@ const addTodo = todos => {
     return currentTodo
 }
 
+// Generates the todo label badge DOM for each label added to the todo
+const generateLabelBadgeDom = (container, label) => {
+    const badgeEl = document.createElement('div')
+    badgeEl.classList.add('todo__label')
+    badgeEl.textContent = label.name
+    badgeEl.style.backgroundColor = label.color
+
+    container.appendChild(badgeEl)
+}
+
 // Fills the edit module with content from the correct todo
 const fillEditModule = currentTodo => {
     editHistory.innerHTML = ''
     editTitle.value = currentTodo.title
     editDate.value = currentTodo.dueDate
     editDescription.value = currentTodo.description
+
+    editLabelBadgeContainer.innerHTML = ''
+
+    // If the current todo has a label
+    if (currentTodo.label.length > 0) {
+        currentTodo.label.forEach(lab => {
+            generateLabelBadgeDom(editLabelBadgeContainer, lab)
+        })
+    }
+
     currentTodo.generateHistoryDOM()
 }
 
@@ -281,16 +296,40 @@ const setEditTodo = todo => {
     currentTodo = todo
 }
 
-// Generate the individual add abel menu elements
-const generateLabelLiDOM = (label) => {
+// Generate the individual add label dropdown menu elements in the edit module
+const generateLabelLiDOM = (labelArg) => {
     const li = document.createElement('li')
-    li.textContent = label.name
-    li.addEventListener('click', e => {
-        // Add the correct label when the menu item is clicked
-        currentTodo.label.push(labels.find(lab => lab.name === label.name))
-        saveTodos(todos)
-        renderTodos(todos, filters)
-    })
+
+    const ind = currentTodo.label.findIndex(lab => lab.id === labelArg.id)
+    
+    // If this todo already has that label
+    if (ind > -1) {
+        //  add a checkmark
+        li.innerHTML = `<button>check</button>${labelArg.name}`
+
+        // When the label option is clicked
+        li.addEventListener('click', e => {
+            // Remove the label from the todo
+            currentTodo.label.splice(ind, 1)
+            saveTodos(todos)
+            renderTodos(todos, filters)
+            fillEditModule(currentTodo)
+        })
+    } else {
+        // If the todo does not have the label
+
+        // No checkm,ark
+        li.textContent = labelArg.name
+
+        li.addEventListener('click', e => {
+            // Add the correct label when the menu item is clicked
+            currentTodo.label.push(labels.find(lab => lab.name === labelArg.name))
+            saveTodos(todos)
+            renderTodos(todos, filters)
+            fillEditModule(currentTodo)
+        })
+    }
+
     editTodoUL.appendChild(li)
 }
 
@@ -316,24 +355,28 @@ const generateAddLabelMenuDOM = (labels, editTodoUL, e) => {
         // If there are no labels matching the user's input
         if (arr.length === 0) {
             console.log('no matching label')
-            const li = document.createElement('li')
-            li.textContent = `Create new ${e.target.value} label`
+            const createNewLabelEl = document.createElement('li')
+            createNewLabelEl.textContent = `Create new ${e.target.value} label`
 
             // Click event for adding new label
-            li.addEventListener('click', () => {
+            createNewLabelEl.addEventListener('click', () => {
                 // Create new label based on users input
                 const newLabel = new Label(e.target.value)
                 labels.push(newLabel)
                 saveLabels(labels)
                 renderLabels(labels)
 
-                // Add that label to the curren todo
+                // Clear input field when label added
+                e.target.value = ''
+
+                // Add that label to the current todo
                 currentTodo.label.push(newLabel)
                 saveTodos(todos)
                 renderTodos(todos, filters)
+                fillEditModule(currentTodo)
             })
 
-            editTodoUL.appendChild(li)
+            editTodoUL.appendChild(createNewLabelEl)
         }
     }
 }
