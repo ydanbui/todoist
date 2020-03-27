@@ -72,6 +72,26 @@ class Todo {
         todoTitle.textContent = this.title ? this.title : 'Write task'
         todoCard.appendChild(todoTitle)
 
+        // Create the label elements the this element has labels
+        if (this.label.length > 0) {
+            const labelsContainer = document.createElement('div')
+            labelsContainer.classList.add('todo__labels-container')
+
+            // Loop through labels and generate badge
+            this.label.forEach(lab => {
+                const labelEl = document.createElement('div')
+                labelEl.classList.add('todo__label')
+                labelEl.textContent = lab.name
+                labelEl.style.backgroundColor = lab.color
+
+                labelsContainer.appendChild(labelEl)
+            })
+
+            todoCard.appendChild(labelsContainer)
+
+        }
+
+
         // Create the due date element
         const dateEl = document.createElement('span')
         dateEl.textContent = this.getDueDate()

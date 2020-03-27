@@ -30,6 +30,22 @@ class Label {
         labelText.addEventListener('input', e => {
             this.name = labelText.textContent
             saveLabels(labels)
+            console.log('todos saved and rendered')
+            saveTodos(todos)
+            renderTodos(todos, filters)
+        })
+
+        const currentLabel = this
+
+        // If the label text is blank, delete it
+        labelText.addEventListener('blur', e => {
+            if (!labelText.textContent.trim()) {
+                console.log('nothing')
+                const i = labels.findIndex(label => label === currentLabel)
+                deleteLabel(labels, i)
+                saveLabels(labels)
+                renderLabels(labels)
+            }
         })
 
         // Don't start new line if user presses enter when editing

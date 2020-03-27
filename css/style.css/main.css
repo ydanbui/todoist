@@ -67,9 +67,22 @@ main {
 }
 
 .todo__card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   background-color: grey;
   margin: 8px;
   padding: 8px;
+}
+
+.todo__labels-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.todo__label {
+  margin-left: 8px;
 }
 
 .edit {

@@ -52,9 +52,18 @@ main {
 
 .todo {
     &__card {
+        display: flex;
         background-color: grey;
         margin: 8px;
         padding: 8px;
+    }
+
+    &__labels-container {
+        display: flex;
+    }
+
+    &__label {
+        margin-left: 8px;
     }
 }
 
