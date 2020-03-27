@@ -131,6 +131,8 @@ const fillLabelMenu = (menuList, label) => {
                 label.color = color
                 saveLabels(labels)
                 renderLabels(labels)
+                saveTodos(todos)
+                renderTodos(todos, filters)
             })
         })
         
