@@ -40,7 +40,7 @@ class Label {
         // If the label text is blank, delete it
         labelText.addEventListener('blur', e => {
             if (!labelText.textContent.trim()) {
-                console.log('nothing')
+                // Delete the label from the labels array
                 const i = labels.findIndex(label => label === currentLabel)
                 deleteLabel(labels, i)
                 saveLabels(labels)
@@ -153,7 +153,23 @@ const fillLabelMenu = (menuList, label) => {
     menuList.appendChild(deleteLabelEl)
 }
 
+// Delete label
 const deleteLabel = (labels, index) => {
+    
+    // Remove label from todos that have that label
+    todos.forEach(todo => {
+        // If the todo has a label
+        if (todo.label.length > 0) {
+            // Check to see if it has the deleted label
+            const labelIndex = todo.label.findIndex(lab => lab === labels[index])
+            if (labelIndex > -1) {
+                todo.label.splice(labelIndex, 1)
+            }
+            saveTodos(todos)
+            renderTodos(todos, filters)
+        }
+    })
+
     labels.splice(index, 1)
 }
 
