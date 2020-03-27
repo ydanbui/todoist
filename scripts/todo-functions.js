@@ -302,11 +302,13 @@ const generateAddLabelMenuDOM = (labels, editTodoUL, e) => {
             // Click event for adding new label
             li.addEventListener('click', () => {
                 // Create new label based on users input
-                labels.push(new Label(e.target.value))
+                const newLabel = new Label(e.target.value)
+                labels.push(newLabel)
                 saveLabels(labels)
                 renderLabels(labels)
 
-                // currentTodo.label.push(labels.find(lab => lab.name === label.name))
+                // Add that label to the curren todo
+                currentTodo.label.push(newLabel)
                 saveTodos(todos)
                 renderTodos(todos, filters)
             })
