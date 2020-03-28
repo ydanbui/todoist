@@ -2,6 +2,7 @@
 
 const searchBar = document.querySelector('.header__search')
 const addTaskBtn = document.querySelector('.btn--add-task')
+const addRandomTaskBtn = document.querySelector('.btn--random-task')
 const todoSection = document.querySelector('.todo')
 const headerBadgeAll = document.querySelector('#headerBadgeAll') 
 const headerBadgeInProgress = document.querySelector('#headerBadgeInProgress') 

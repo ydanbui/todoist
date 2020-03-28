@@ -384,12 +384,11 @@ const generateAddLabelMenuDOM = (labels, editTodoUL, e) => {
 // BORED API REQUEST
 const getRandomTodo = async () => {
     const response = await fetch('http://www.boredapi.com/api/activity/')
-    
     if (!response.ok) {
         throw Error('Unable to fetch random activity')
     }
 
     const data = await response.json()
-
+    
     return data.activity
 }

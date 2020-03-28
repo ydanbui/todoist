@@ -74,6 +74,22 @@ addTaskBtn.addEventListener('click', e => {
     displayEditModule()
 })
 
+// Fetch random activity from API and add it as todo
+addRandomTaskBtn.addEventListener('click', e => {
+    closeEditModule()
+    addTodo(todos)
+
+    getRandomTodo().then(activity => {
+        currentTodo.title = activity
+        saveTodos(todos)
+        renderTodos(todos, filters)
+        renderBadges(todos)
+    }).catch(err => {
+        console.log(`Error: ${err}`)
+    })
+
+})
+
 // Sync data across windows
 window.addEventListener('storage', e => {
     if (e.key === 'todos') {
