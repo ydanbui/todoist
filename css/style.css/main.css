@@ -20,18 +20,9 @@ button {
   border: none;
 }
 
-.show {
-  display: block;
-}
-
-body {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 251px 1fr;
-      grid-template-columns: 251px 1fr;
-  -ms-grid-rows: 84px 1fr;
-      grid-template-rows: 84px 1fr;
-      grid-template-areas: "sidebar header" "sidebar main";
+.icon {
+  width: 24px;
+  height: 24px;
 }
 
 .header {
@@ -96,12 +87,37 @@ body {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
-  padding: 8px 16px;
   margin-left: 80px;
+  position: relative;
+}
+
+.header__search-field {
+  padding: 8px 16px;
   width: 300px;
   font-size: 14px;
   border: 1px solid #E0E4E8;
   border-radius: 30px;
+}
+
+.header__search .search-icon {
+  position: absolute;
+  top: calc(50% - 12px);
+  right: 12px;
+  fill: #306BFF !important;
+}
+
+.show {
+  display: block;
+}
+
+body {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 251px 1fr;
+      grid-template-columns: 251px 1fr;
+  -ms-grid-rows: 84px 1fr;
+      grid-template-rows: 84px 1fr;
+      grid-template-areas: "sidebar header" "sidebar main";
 }
 
 .sidebar {

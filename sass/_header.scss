@@ -1,0 +1,70 @@
+.header {
+    background-color: #fff;
+    grid-area: header;
+    display: flex;
+    justify-content: center;
+
+    &__nav {
+        margin-left: 200px;
+
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+    &__tab {
+        color: $gray-3;
+        font-weight: 600;
+        font-size: 16px;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+        margin-left: 12px;
+
+        &--active {
+            color: $secondary;
+            box-shadow: 0px -4px 0px $secondary inset;
+
+            .header__badge {
+                background-color: $secondary;
+                color: #fff;
+            }
+        }
+    }
+
+    &__badge {
+        background-color: $gray-1;
+        color: $gray-3;
+        font-size: 12px;
+
+        padding: 0 6px;
+        border-radius: 8px;
+        margin-left: 8px;
+    }
+
+    &__search {
+        align-self: center;
+        margin-left: 80px;
+
+        position: relative;
+        
+        &-field {
+            padding: 8px 16px;
+        
+            width: 300px;
+    
+            font-size: 14px;
+            border: 1px solid $gray-1;
+            border-radius: 30px;
+        }
+
+        .search-icon {
+            position: absolute;
+            top: calc(50% - 12px);
+            right: 12px;
+            fill: $secondary !important;
+        }
+    }
+
+}

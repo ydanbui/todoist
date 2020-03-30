@@ -15,7 +15,12 @@
             <button id="inProgressTab" class="header__tab">In Progress <span id="headerBadgeInProgress" class="header__badge"></span></button>
             <button id="completedTab" class="header__tab">Completed <span id="headerBadgeCompleted" class="header__badge"></span></button>
         </nav>
-        <input class="header__search" type="text" placeholder="Search">
+        <div class="header__search">
+            <input class="header__search-field" type="text" placeholder="Search">
+            <svg class="icon search-icon">
+                <use xlink:href="icons.svg#search"></use>
+            </svg>
+        </div>
     </header>
 
 
