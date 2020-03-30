@@ -35,7 +35,7 @@ renderBadges(todos)
 renderLabels(labels)
 
 // Search bar input event handler
-searchBar.addEventListener('input', e => {
+searchBar.addEventListener('input', function(e) {
     // Set filter to be search input
     filters.searchText = e.target.value
 
@@ -44,22 +44,24 @@ searchBar.addEventListener('input', e => {
 })
 
 // Set filter when tab is clicked
-allTab.addEventListener('click', e => {
+allTab.addEventListener('click', function(e) {
     filters.tab = 0
     headingEl.textContent = 'All'
-
+    setActiveTab(this)
     renderTodos(todos, filters)
 })
 
-inProgressTab.addEventListener('click', e => {
+inProgressTab.addEventListener('click', function(e) {
     filters.tab = 1
     headingEl.textContent = 'In Progress'
+    setActiveTab(this)
     renderTodos(todos, filters)
 })
 
-completedTab.addEventListener('click', e => {
+completedTab.addEventListener('click', function(e) {
     filters.tab = 2
-    headingEl.textContent = 'Completed'
+    headingEl.textContent = 'Completed' 
+    setActiveTab(this)
     renderTodos(todos, filters)
 })
 

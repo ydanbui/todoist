@@ -248,6 +248,19 @@ const addTodo = todos => {
     return currentTodo
 }
 
+// Set the styling for the current tab
+const setActiveTab = (activeTab) => {
+    const tabs = document.querySelectorAll('.header__tab')
+
+    tabs.forEach(tab => {
+        if (tab === activeTab) {
+            tab.classList.add('header__tab--active')
+        } else {
+            tab.classList.remove('header__tab--active')
+        }
+    })
+}
+
 // Generates the todo label badge DOM for each label added to the todo
 const generateLabelBadgeDom = (container, label) => {
     const badgeEl = document.createElement('div')

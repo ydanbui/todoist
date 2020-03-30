@@ -12,6 +12,14 @@ html {
           box-sizing: border-box;
 }
 
+body, button, input {
+  font-family: 'Titillium Web', sans-serif !important;
+}
+
+button {
+  border: none;
+}
+
 .show {
   display: block;
 }
@@ -27,10 +35,73 @@ body {
 }
 
 .header {
-  background-color: grey;
+  background-color: #fff;
   -ms-grid-row: 1;
   -ms-grid-column: 2;
   grid-area: header;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.header__nav {
+  margin-left: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.header__tab {
+  color: #738499;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 12px;
+  margin-left: 12px;
+}
+
+.header__tab--active {
+  color: #306BFF;
+  -webkit-box-shadow: 0px -4px 0px #306BFF inset;
+          box-shadow: 0px -4px 0px #306BFF inset;
+}
+
+.header__tab--active .header__badge {
+  background-color: #306BFF;
+  color: #fff;
+}
+
+.header__badge {
+  background-color: #E0E4E8;
+  color: #738499;
+  font-size: 12px;
+  padding: 0 6px;
+  border-radius: 8px;
+  margin-left: 8px;
+}
+
+.header__search {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  padding: 8px 16px;
+  margin-left: 80px;
+  width: 300px;
+  font-size: 14px;
+  border: 1px solid #E0E4E8;
+  border-radius: 30px;
 }
 
 .sidebar {
@@ -64,6 +135,7 @@ main {
   -ms-grid-column: 2;
   grid-area: main;
   padding: 48px;
+  background-color: #F5F7FA;
 }
 
 .todo__card {
