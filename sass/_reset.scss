@@ -22,4 +22,11 @@ button {
 .icon {
     width: 24px;
     height: 24px;
+
+    &--back {
+        width: 16px;
+        height: 16px;
+
+        margin-right: 8px;
+    }
 }

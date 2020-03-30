@@ -74,7 +74,7 @@ class Label {
 
         const menuBtn = document.createElement('button')
         menuBtn.classList.add('menu__btn')
-        menuBtn.textContent = '...'
+        menuBtn.innerHTML = '<svg class="icon"><use xlink:href="/img/icons.svg#icon-menu"></use></svg>'
 
         const menuList = document.createElement('ul')
         menuList.classList.add('menu__list')
@@ -99,7 +99,7 @@ const fillLabelMenu = (menuList, label) => {
         menuList.innerHTML = ''
 
         const backBtn = document.createElement('button')
-        backBtn.textContent = 'b'
+        backBtn.innerHTML = '<svg class="icon icon--back"><use xlink:href="/img/icons.svg#icon-back-arrow"></use></svg>'
 
         // Move back to previous menu when clicked
         backBtn.addEventListener('click', e => {
@@ -120,6 +120,8 @@ const fillLabelMenu = (menuList, label) => {
         setColorEl.appendChild(spanEl)
         
         const colorsEl = document.createElement('li')
+        colorsEl.classList.add('color-container')
+
 
         // Loop through label colors and render them
         labelColors.forEach(color => {
