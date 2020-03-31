@@ -63,12 +63,24 @@ class Todo {
         const todoCard = document.createElement('article')
         todoCard.classList.add('todo__card')
 
+        // Create the checkbox label container
+        const checkboxLabel = document.createElement('label')
+        checkboxLabel.classList.add('todo__checkbox-container')
+
         // Create the checkbox
         const todoCheckbox = this.generateCheckboxDom()
-        todoCard.appendChild(todoCheckbox)
+        checkboxLabel.appendChild(todoCheckbox)
+
+        // Create the pseudo checkbox for checkbox hack
+        const todoCheckmark = document.createElement('span')
+        todoCheckmark.classList.add('todo__checkmark')
+        checkboxLabel.appendChild(todoCheckmark)
+
+        todoCard.appendChild(checkboxLabel)
 
         // Create the text content
         const todoTitle = document.createElement('span')
+        todoTitle.classList.add('todo__title')
         todoTitle.textContent = this.title ? this.title : 'Write task'
         todoCard.appendChild(todoTitle)
 
@@ -86,15 +98,25 @@ class Todo {
 
         }
 
-
-        // Create the due date element
-        const dateEl = document.createElement('span')
-        dateEl.textContent = this.getDueDate()
-        todoCard.appendChild(dateEl)
+        // Create due date element if due date was set
+        if (this.dueDate) {
+            // Create the due date element
+            const dateEl = document.createElement('span')
+            dateEl.classList.add('todo__date')
+            dateEl.textContent = this.getDueDate()
+    
+            // If the due date is before today make the text red
+            if (moment(this.dueDate).isBefore(moment())) {
+                dateEl.style.color = '#F42323'
+            }
+    
+            todoCard.appendChild(dateEl)
+        }
 
         // Create the delete button
         const deleteTodoEl = document.createElement('button')
-        deleteTodoEl.textContent = 'X'
+        deleteTodoEl.classList.add('todo__delete')
+        deleteTodoEl.innerHTML = '<svg class="icon"><use xlink:href="/img/icons.svg#icon-delete"></use></svg>'
         deleteTodoEl.addEventListener('click', e => {
             deleteTodo(todos, index)
             saveTodos(todos)

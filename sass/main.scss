@@ -1,8 +1,10 @@
-@import 'reset';
 @import 'variables';
+@import 'reset';
 
 @import 'header';
 @import 'sidebar';
+@import 'main-area';
+@import 'todo';
 
 .show {
     display: block;
@@ -14,29 +16,6 @@ body {
     grid-template-rows: 84px 1fr;
     grid-template-areas:    "sidebar header"
                             "sidebar main";
-}
-
-main {
-    grid-area: main;
-    padding: 48px;
-    background-color: $background;
-}
-
-.todo {
-    &__card {
-        display: flex;
-        background-color: grey;
-        margin: 8px;
-        padding: 8px;
-    }
-
-    &__labels-container {
-        display: flex;
-    }
-
-    &__label {
-        margin-left: 8px;
-    }
 }
 
 .edit {

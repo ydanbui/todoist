@@ -1,0 +1,124 @@
+.todo {
+    margin-bottom: 32px;
+
+    &__card {
+        display: flex;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+        
+        background: #FFFFFF;
+        border: 1px solid #E2E9F0;
+        box-sizing: border-box;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.06);
+        border-radius: 4px;
+        padding: 24px;
+
+        font-size: 18px;
+        line-height: 125%;
+
+        &:not(:last-child) {
+            margin-bottom: 16px;
+        }
+
+        &:hover {
+            box-shadow: 0px 4px 19px rgba(0, 0, 0, 0.09);
+            transform: translateY(-2%) scale(1.01);
+
+            transition: ease-in .1s all;
+
+            & .todo__delete {
+                opacity: 1;
+                margin-left: 20px;
+                transition: ease-in .2s opacity;  
+                cursor: pointer;  
+            }
+            
+        }
+    }
+
+    &__checkbox {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    .todo__checkbox:checked {
+        & ~ .todo__checkmark {
+            background-color: #01942A;
+
+            &:after {
+                display: block;
+            }
+        }
+
+    }
+
+    &__checkmark {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 25px;
+        width: 25px;
+        background-color: #FFFFFF;
+        border: 1px solid #c4c4c4;
+        border-radius: 50%;
+
+        &:hover {
+            background-color: $background;
+            cursor: pointer;
+        }
+
+        /* Create the checkmark/indicator (hidden when not checked) */
+        &:after {
+            content: "";
+            position: absolute;
+            display: none;
+            z-index: 4;
+            // left: 9px;
+            // top: 5px;
+            width: 100%;
+            height: 100%;
+            // transform: scale(1.3);
+            background-size: 50%;
+            background-image: url("https://webdevtrick.com/demos/checkmark.svg");
+            // background-image: url('/img/icon-checkmark.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
+
+    &__title {
+        margin-left: 40px;
+        margin-right: auto;
+    }
+
+    &__labels-container {
+        display: flex;
+    }
+
+    &__label {
+        margin-left: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 125%;
+        border-radius: 4px;
+        padding: 4px 6px;
+    }
+
+    &__date {
+        margin-left: 16px;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 125%;
+        color: #738499;
+    }
+
+    &__delete {
+        margin-left: -20px;
+        display: flex;
+        opacity: 0;
+    }
+}

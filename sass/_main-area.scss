@@ -1,0 +1,16 @@
+main {
+    grid-area: main;
+    padding: 64px;
+    background-color: $background;
+
+    display: flex;
+}
+
+.todo-area {
+    flex: 1 0 600px;
+
+    .heading {
+        font-size: 48px;
+        line-height: 125%;
+    }
+}
