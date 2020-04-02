@@ -17,6 +17,14 @@
         font-size: 18px;
         line-height: 125%;
 
+        &--active {
+            opacity: 65%;
+
+            .todo__title {
+                text-decoration: line-through;
+            }
+        }
+
         &:not(:last-child) {
             margin-bottom: 16px;
         }

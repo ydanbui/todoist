@@ -7,10 +7,12 @@ const createLabelBtn = document.querySelector('.btn--create-label')
 class Label {
     // Default name follows the Label, Label 2, Label 3 pattern
     constructor(name = `Label ${labels.length > 0 ? labels.length + 1 : ''}`) {
+            const col = labelColors[labels.length % 8]
             this.id = uuidv4(),
             this.name = name,
             // Set colors according to labelColors array. Loop through it
-            this.color = labelColors[labels.length % 8]
+            this.color = col,
+            this.textColor = LightenDarkenColor(col, -150)
     }
 
     // Generate the label bullet point

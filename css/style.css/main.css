@@ -245,6 +245,14 @@ main {
   line-height: 125%;
 }
 
+.todo__card--active {
+  opacity: 65%;
+}
+
+.todo__card--active .todo__title {
+  text-decoration: line-through;
+}
+
 .todo__card:not(:last-child) {
   margin-bottom: 16px;
 }
