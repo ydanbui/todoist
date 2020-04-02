@@ -32,6 +32,42 @@ button {
   margin-right: 8px;
 }
 
+.btn {
+  padding: 8px 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+}
+
+.btn--small {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 125%;
+  color: #738499;
+  background: #FFFFFF;
+  border: 2px solid #E8ECF1;
+  border-radius: 4px;
+}
+
+.btn--small svg {
+  margin-right: 8px;
+}
+
+.btn--small svg path {
+  fill: #738499;
+}
+
+.btn--small-completed {
+  background-color: #33a556;
+  color: #fff;
+  border: 2px solid #33a556;
+}
+
+.btn--small-completed path {
+  fill: #fff !important;
+}
+
 .header {
   background-color: #fff;
   -ms-grid-row: 1;
@@ -57,6 +93,7 @@ button {
 
 .header__tab {
   color: #738499;
+  cursor: pointer;
   font-weight: 600;
   font-size: 16px;
   text-transform: uppercase;
@@ -357,6 +394,51 @@ main {
   opacity: 0;
 }
 
+.edit {
+  display: none;
+  background: #FFFFFF;
+  border: 1px solid #E2E9F0;
+  -webkit-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.06);
+          box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+  padding: 24px;
+}
+
+.edit__controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 24px;
+}
+
+.edit__complete {
+  margin-right: auto;
+  cursor: pointer;
+}
+
+.edit__delete {
+  cursor: pointer;
+}
+
+.edit__close {
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+.edit__title {
+  margin-bottom: 48px;
+  border: none;
+  display: block;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 125%;
+  /* identical to box height, or 30px */
+  color: #19223B;
+}
+
 .show {
   display: block;
 }
@@ -369,11 +451,6 @@ body {
   -ms-grid-rows: 84px 1fr;
       grid-template-rows: 84px 1fr;
       grid-template-areas: "sidebar header" "sidebar main";
-}
-
-.edit {
-  background-color: green;
-  display: none;
 }
 
 .menu {

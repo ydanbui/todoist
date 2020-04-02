@@ -46,10 +46,19 @@
             <button class="btn btn--primary btn--random-task">Random Task!</button>
         </div>
         <article class="edit">
-            EDIT
-            <button class="edit__complete">Complete</button>
-            <button class="edit__delete">Delete</button>
-            <button class="edit__close">x</button>
+            <div class="edit__controls">
+                <button class="edit__complete btn btn--small"></button>
+                <button class="edit__delete">
+                    <svg class="icon">
+                        <use xlink:href="/img/icons.svg#icon-delete"></use>
+                    </svg>
+                </button>
+                <button class="edit__close">
+                    <svg class="icon">
+                        <use xlink:href="/img/icons.svg#icon-close"></use>
+                    </svg>
+                </button>
+            </div>
             <input class="edit__title" type="text" placeholder="Write task">
             <label class="edit__label">Due date<input class="edit__date" type="date"></label>
             <label class="edit__label">Label

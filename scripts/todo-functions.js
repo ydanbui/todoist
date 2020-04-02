@@ -294,7 +294,6 @@ const generateLabelBadgeDom = (container, label) => {
     badgeEl.textContent = label.name
     badgeEl.style.backgroundColor = label.color
     badgeEl.style.color = label.textColor
-    console.log(label)
 
     container.appendChild(badgeEl)
 }
@@ -302,6 +301,20 @@ const generateLabelBadgeDom = (container, label) => {
 // Fills the edit module with content from the correct todo
 const fillEditModule = currentTodo => {
     editHistory.innerHTML = ''
+
+    console.log(currentTodo)
+    const checkmarkSVG = '<svg fill="none" height="18" viewBox="0 0 18 18" width="18" xmlns="http://www.w3.org/2000/svg"><path d="m16.0312 3.33984h-1.2287c-.1723 0-.3358.07911-.4413.21446l-7.24742 9.1811-3.47519-4.40337c-.05257-.06675-.11958-.12072-.196-.15786-.07641-.03714-.16025-.05649-.24521-.05659h-1.22871c-.11778 0-.18281.13535-.11074.22676l4.81464 6.09956c.225.2848.65743.2848.88418 0l8.58515-10.87906c.0721-.08964.007-.225-.1107-.225z" fill="#000"/></svg>'
+    // IF the current todo is completed
+    if (currentTodo.completed) {
+        // Style the completed button
+        editComplete.innerHTML = `${checkmarkSVG}<span>Completed</span>`
+        editComplete.classList.add('btn--small-completed')
+    } else {
+        editComplete.innerHTML = `${checkmarkSVG}<span>Mark Complete</span>`
+        editComplete.classList.remove('btn--small-completed')
+
+    }
+
     editTitle.value = currentTodo.title
     editDate.value = currentTodo.dueDate
     editDescription.value = currentTodo.description
