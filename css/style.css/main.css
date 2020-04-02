@@ -21,6 +21,14 @@ button {
   border: none;
 }
 
+label {
+  color: #738499;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 125%;
+  display: block;
+}
+
 .icon {
   width: 24px;
   height: 24px;
@@ -66,6 +74,34 @@ button {
 
 .btn--small-completed path {
   fill: #fff !important;
+}
+
+.dropdown {
+  display: none;
+  z-index: 100;
+  list-style: none;
+  background-color: #fff;
+  color: #19223B;
+  border: 1px solid #E0E4E8;
+  -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.11);
+          box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.11);
+  border-radius: 4px;
+  position: absolute;
+}
+
+.dropdown li {
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.dropdown li:hover {
+  background-color: #F5F7FA;
+  cursor: pointer;
 }
 
 .header {
@@ -404,6 +440,22 @@ main {
   padding: 24px;
 }
 
+.edit .edit__label {
+  margin-bottom: 32px;
+}
+
+.edit .edit__label-text {
+  width: 88px;
+  display: inline-block;
+}
+
+.edit input {
+  border: none;
+  color: #738499;
+  font-size: 16px;
+  line-height: 125%;
+}
+
 .edit__controls {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -430,7 +482,6 @@ main {
 
 .edit__title {
   margin-bottom: 48px;
-  border: none;
   display: block;
   font-size: 24px;
   font-weight: 600;
@@ -439,8 +490,24 @@ main {
   color: #19223B;
 }
 
-.show {
-  display: block;
+.edit__todo-div {
+  display: inline-block;
+}
+
+.edit__todo-ul {
+  min-width: 224px;
+}
+
+.edit__todo-ul li {
+  padding: 16px;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 125%;
+  color: #19223B;
+}
+
+.edit__todo-ul li svg {
+  margin-right: 8px;
 }
 
 body {
@@ -451,6 +518,10 @@ body {
   -ms-grid-rows: 84px 1fr;
       grid-template-rows: 84px 1fr;
       grid-template-areas: "sidebar header" "sidebar main";
+}
+
+.show {
+  display: block !important;
 }
 
 .menu {
@@ -468,25 +539,10 @@ body {
 }
 
 .menu__list {
-  z-index: 100;
-  list-style: none;
-  background-color: #fff;
-  color: #19223B;
-  border: 1px solid #E0E4E8;
-  -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.11);
-          box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.11);
-  border-radius: 4px;
-  position: absolute;
   min-width: 140px;
 }
 
 .menu__list li {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   padding: 12px 16px;
 }
 
@@ -500,19 +556,45 @@ body {
   display: flex;
 }
 
-.menu__list .color-container {
+.menu__list .change-color-container {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (1fr)[4];
       grid-template-columns: repeat(4, 1fr);
   gap: 8px;
+  cursor: default !important;
 }
 
-.menu__list .color-container * {
+.menu__list .change-color-container * {
   margin: 0 !important;
 }
 
+.menu__list .change-color-container:hover {
+  background-color: #FFF;
+}
+
+.menu__list .change-color-container .menu__color:hover {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+  -webkit-transition: ease-in .1s transform;
+  transition: ease-in .1s transform;
+}
+
+.menu__set-color:hover {
+  background-color: #fff !important;
+  cursor: default !important;
+}
+
+.menu__set-color svg:hover {
+  cursor: pointer;
+}
+
+.menu__set-color .menu__color {
+  cursor: default;
+}
+
 .menu__color {
+  cursor: pointer;
   width: 20px;
   height: 20px;
   border-radius: 4px;

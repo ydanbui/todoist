@@ -6,6 +6,23 @@
     border-radius: 4px;
     padding: 24px;
 
+    .edit__label {
+        margin-bottom: 32px;
+
+        &-text {
+            width: 88px;
+            display: inline-block;
+        }
+    }
+
+    input {
+        border: none;
+        color: $gray-3;
+        font-size: 16px;
+        line-height: 125%;
+
+    }
+
     &__controls {
         display: flex;
         align-items: center;
@@ -28,14 +45,31 @@
 
     &__title {
         margin-bottom: 48px;
-        border: none;
         display: block;
         font-size: 24px;
         font-weight: 600;
         line-height: 125%;
         /* identical to box height, or 30px */
-
-
         color: $text-dark;
+    }
+
+    &__todo-div {
+        display:inline-block;
+    }
+
+    &__todo-ul {
+        min-width: 224px;
+
+        li {
+            padding: 16px;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 125%;
+            color: $text-dark;
+
+            svg {
+                margin-right: 8px;
+            }
+        }
     }
 }

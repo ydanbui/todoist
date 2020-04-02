@@ -76,10 +76,20 @@ class Label {
 
         const menuBtn = document.createElement('button')
         menuBtn.classList.add('menu__btn')
-        menuBtn.innerHTML = '<svg class="icon"><use xlink:href="/img/icons.svg#icon-menu"></use></svg>'
+        menuBtn.innerHTML = '<svg class="icon" id="menuIconEl"><use id = "menuUseEl" xlink:href="/img/icons.svg#icon-menu"></use></svg>'
+        menuBtn.addEventListener('click', e=> {
+            myFunction()
+        })
 
         const menuList = document.createElement('ul')
         menuList.classList.add('menu__list')
+        menuList.classList.add('dropdown')
+
+        // Stop bubbling so that clicking in dropdown won't bubble up to window and close it
+        menuList.addEventListener('click', e => {
+            console.log('click')
+            event.stopPropagation();
+        })
 
         fillLabelMenu(menuList, label)
         
@@ -102,7 +112,7 @@ const fillLabelMenu = (menuList, label) => {
 
         const backBtn = document.createElement('button')
         backBtn.innerHTML = '<svg class="icon icon--back"><use xlink:href="/img/icons.svg#icon-back-arrow"></use></svg>'
-
+        
         // Move back to previous menu when clicked
         backBtn.addEventListener('click', e => {
             menuList.innerHTML = ''
@@ -110,6 +120,7 @@ const fillLabelMenu = (menuList, label) => {
         })
         
         const setColorEl = document.createElement('li')
+        setColorEl.classList.add('menu__set-color')
         const colorDiv = document.createElement('div')
         colorDiv.classList.add('menu__color')
         colorDiv.style.backgroundColor = label.color
@@ -122,8 +133,7 @@ const fillLabelMenu = (menuList, label) => {
         setColorEl.appendChild(spanEl)
         
         const colorsEl = document.createElement('li')
-        colorsEl.classList.add('color-container')
-
+        colorsEl.classList.add('change-color-container')
 
         // Loop through label colors and render them
         labelColors.forEach(color => {

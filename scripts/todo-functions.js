@@ -359,7 +359,8 @@ const generateLabelLiDOM = (labelArg) => {
     // If this todo already has that label
     if (ind > -1) {
         //  add a checkmark
-        li.innerHTML = `<button>check</button>${labelArg.name}`
+        li.innerHTML = `<svg fill="none" height="18" viewBox="0 0 18 18" width="18" xmlns="http://www.w3.org/2000/svg"><path d="m16.0312 3.33984h-1.2287c-.1723 0-.3358.07911-.4413.21446l-7.24742 9.1811-3.47519-4.40337c-.05257-.06675-.11958-.12072-.196-.15786-.07641-.03714-.16025-.05649-.24521-.05659h-1.22871c-.11778 0-.18281.13535-.11074.22676l4.81464 6.09956c.225.2848.65743.2848.88418 0l8.58515-10.87906c.0721-.08964.007-.225-.1107-.225z" fill="#000"/></svg>${labelArg.name}`
+        li.style.fontWeight = '600'
 
         // When the label option is clicked
         li.addEventListener('click', e => {
@@ -477,4 +478,24 @@ function LightenDarkenColor(col, amt) {
  
     return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
   
+}
+// DROPDOWN
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.querySelector(".dropdown").classList.toggle("show");
+  }
+  
+  // Close the dropdown menu if the user clicks outside of it
+  window.onclick = function(event) {
+      if (!event.target.matches('#menuIconEl') && !event.target.matches('#menuUseEl')) {
+      var dropdowns = document.querySelectorAll(".dropdown");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
 }

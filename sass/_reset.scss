@@ -20,6 +20,15 @@ button {
     border: none;
 }
 
+label {
+    color: $gray-3;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 125%;
+
+    display: block;
+}
+
 .icon {
     width: 24px;
     height: 24px;
