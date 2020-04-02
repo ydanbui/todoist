@@ -84,17 +84,19 @@ editTodoLabel.addEventListener('focus', e => {
     }
 
     // Clear menu elements
-    editTodoUL.innerHTML = ''
+    editTodoDropdown.innerHTML = ''
 
-    generateAddLabelMenuDOM(labels, editTodoUL, e)
+    generateAddLabelMenuDOM(labels, editTodoDropdown, e)
+    displayDropdown('.edit__todo-dropdown')
+
 })
 
 // Filters label menu on user input
 editTodoLabel.addEventListener('input', e => {
     // Clear menu elements
-    editTodoUL.innerHTML = ''
+    editTodoDropdown.innerHTML = ''
 
-    generateAddLabelMenuDOM(labels, editTodoUL, e)
+    generateAddLabelMenuDOM(labels, editTodoDropdown, e)
 })
 
 editDescription.addEventListener('input', e => {
@@ -116,3 +118,8 @@ editDescription.addEventListener('change', e => {
 
     fillEditModule(currentTodo)
 })
+
+// Display dropdown when label input is clicked
+// document.querySelector('#editLabelInput').addEventListener('click', e => {
+//     console.log('edit label input clicked')
+// })

@@ -494,11 +494,11 @@ main {
   display: inline-block;
 }
 
-.edit__todo-ul {
+.edit__todo-dropdown {
   min-width: 224px;
 }
 
-.edit__todo-ul li {
+.edit__todo-dropdown li {
   padding: 16px;
   font-weight: normal;
   font-size: 16px;
@@ -506,7 +506,7 @@ main {
   color: #19223B;
 }
 
-.edit__todo-ul li svg {
+.edit__todo-dropdown li svg {
   margin-right: 8px;
 }
 
@@ -518,6 +518,10 @@ body {
   -ms-grid-rows: 84px 1fr;
       grid-template-rows: 84px 1fr;
       grid-template-areas: "sidebar header" "sidebar main";
+}
+
+.hide {
+  display: none !important;
 }
 
 .show {

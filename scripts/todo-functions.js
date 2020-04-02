@@ -302,7 +302,6 @@ const generateLabelBadgeDom = (container, label) => {
 const fillEditModule = currentTodo => {
     editHistory.innerHTML = ''
 
-    console.log(currentTodo)
     const checkmarkSVG = '<svg fill="none" height="18" viewBox="0 0 18 18" width="18" xmlns="http://www.w3.org/2000/svg"><path d="m16.0312 3.33984h-1.2287c-.1723 0-.3358.07911-.4413.21446l-7.24742 9.1811-3.47519-4.40337c-.05257-.06675-.11958-.12072-.196-.15786-.07641-.03714-.16025-.05649-.24521-.05659h-1.22871c-.11778 0-.18281.13535-.11074.22676l4.81464 6.09956c.225.2848.65743.2848.88418 0l8.58515-10.87906c.0721-.08964.007-.225-.1107-.225z" fill="#000"/></svg>'
     // IF the current todo is completed
     if (currentTodo.completed) {
@@ -369,27 +368,30 @@ const generateLabelLiDOM = (labelArg) => {
             saveTodos(todos)
             renderTodos(todos, filters)
             fillEditModule(currentTodo)
+            setTimeout(removeLabelDropdown, 10)
         })
     } else {
         // If the todo does not have the label
 
-        // No checkm,ark
+        // No checkmark
         li.textContent = labelArg.name
 
         li.addEventListener('click', e => {
             // Add the correct label when the menu item is clicked
+            
             currentTodo.label.push(labels.find(lab => lab.name === labelArg.name))
             saveTodos(todos)
             renderTodos(todos, filters)
             fillEditModule(currentTodo)
+            setTimeout(removeLabelDropdown, 10)
         })
     }
 
-    editTodoUL.appendChild(li)
+    editTodoDropdown.appendChild(li)
 }
 
 // Generate menu for add label to todo in edit module
-const generateAddLabelMenuDOM = (labels, editTodoUL, e) => {
+const generateAddLabelMenuDOM = (labels, editTodoDropdown, e) => {
     // If user has not entered input
     if (!e.target.value.trim()) {
         // Generate a menu element for each created label
@@ -431,7 +433,7 @@ const generateAddLabelMenuDOM = (labels, editTodoUL, e) => {
                 fillEditModule(currentTodo)
             })
 
-            editTodoUL.appendChild(createNewLabelEl)
+            editTodoDropdown.appendChild(createNewLabelEl)
         }
     }
 }
@@ -482,13 +484,24 @@ function LightenDarkenColor(col, amt) {
 // DROPDOWN
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
-function myFunction() {
-    document.querySelector(".dropdown").classList.toggle("show");
+function displayDropdown(classToQuery) {
+    // If it's the label dropdown, don't toggle off the display when clicking the input again
+    if (classToQuery === '.edit__todo-dropdown') {
+        document.querySelector(classToQuery).classList.add("show");
+    } else {
+        document.querySelector(classToQuery).classList.toggle("show");
+    }
+  }
+
+  function removeLabelDropdown() {
+      console.log('remoce dropdown runs')
+      editTodoLabel.blur()
+    document.querySelector('.edit__todo-dropdown').classList.remove("show");
   }
   
   // Close the dropdown menu if the user clicks outside of it
-  window.onclick = function(event) {
-      if (!event.target.matches('#menuIconEl') && !event.target.matches('#menuUseEl')) {
+  window.onclick = function(e) {
+      if (!e.target.matches('#menuIconEl') && !e.target.matches('#menuUseEl') && !e.target.matches('#editLabelInput')) {
       var dropdowns = document.querySelectorAll(".dropdown");
       var i;
       for (i = 0; i < dropdowns.length; i++) {

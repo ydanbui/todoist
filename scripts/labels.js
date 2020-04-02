@@ -78,7 +78,7 @@ class Label {
         menuBtn.classList.add('menu__btn')
         menuBtn.innerHTML = '<svg class="icon" id="menuIconEl"><use id = "menuUseEl" xlink:href="/img/icons.svg#icon-menu"></use></svg>'
         menuBtn.addEventListener('click', e=> {
-            myFunction()
+            displayDropdown('.menu__list')
         })
 
         const menuList = document.createElement('ul')
