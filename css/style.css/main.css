@@ -440,7 +440,7 @@ main {
   padding: 24px;
 }
 
-.edit .edit__label {
+.edit__label {
   margin-bottom: 32px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -450,9 +450,15 @@ main {
           align-items: center;
 }
 
-.edit .edit__label-text {
+.edit__label-text {
   width: 88px;
   display: inline-block;
+}
+
+.edit__label-badges {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .edit input {
@@ -519,6 +525,22 @@ main {
 
 .edit__todo-dropdown li svg {
   margin-right: 8px;
+}
+
+.add-btn {
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  background-color: #EBEEF2;
+  background-image: url("/img/icon-checkmark.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  display: none;
+}
+
+.add-btn:hover {
+  background-color: #E0E4E8;
 }
 
 body {

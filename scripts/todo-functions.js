@@ -322,9 +322,14 @@ const fillEditModule = currentTodo => {
 
     // If the current todo has a label
     if (currentTodo.label.length > 0) {
+        document.querySelector('#addBtn').style.display='block'
+        // editTodoLabel.style.display='none'
         currentTodo.label.forEach(lab => {
             generateLabelBadgeDom(editLabelBadgeContainer, lab)
         })
+    } else {
+        // editTodoLabel.style.display='block'
+        document.querySelector('#addBtn').style.display='none'      
     }
 
     currentTodo.generateHistoryDOM()

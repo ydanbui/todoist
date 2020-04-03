@@ -6,7 +6,7 @@
     border-radius: 4px;
     padding: 24px;
 
-    .edit__label {
+    &__label {
         margin-bottom: 32px;
         display: flex;
         align-items: center;
@@ -14,6 +14,10 @@
         &-text {
             width: 88px;
             display: inline-block;
+        }
+
+        &-badges {
+            display: flex;
         }
     }
 
@@ -77,5 +81,21 @@
                 margin-right: 8px;
             }
         }
+    }
+}
+
+.add-btn {
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    background-color: #EBEEF2;
+    background-image: url('/img/icon-checkmark.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    display: none;
+
+    &:hover {
+        background-color: $gray-1;
     }
 }
