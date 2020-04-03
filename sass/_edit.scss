@@ -8,6 +8,8 @@
 
     .edit__label {
         margin-bottom: 32px;
+        display: flex;
+        align-items: center;
 
         &-text {
             width: 88px;
@@ -54,11 +56,15 @@
     }
 
     &__todo-div {
-        display:inline-block;
+        // display:inline-block;
+        display: flex;
+        position: relative;
     }
 
     &__todo-dropdown {
         min-width: 224px;
+        position: absolute;
+        top: 115%;
 
         li {
             padding: 16px;

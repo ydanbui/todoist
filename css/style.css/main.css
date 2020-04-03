@@ -442,6 +442,12 @@ main {
 
 .edit .edit__label {
   margin-bottom: 32px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .edit .edit__label-text {
@@ -491,11 +497,16 @@ main {
 }
 
 .edit__todo-div {
-  display: inline-block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
 }
 
 .edit__todo-dropdown {
   min-width: 224px;
+  position: absolute;
+  top: 115%;
 }
 
 .edit__todo-dropdown li {

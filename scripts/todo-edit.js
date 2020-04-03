@@ -87,7 +87,7 @@ editTodoLabel.addEventListener('focus', e => {
     editTodoDropdown.innerHTML = ''
 
     generateAddLabelMenuDOM(labels, editTodoDropdown, e)
-    displayDropdown('.edit__todo-dropdown')
+    // displayDropdown('.edit__todo-dropdown')
 
 })
 
@@ -120,6 +120,8 @@ editDescription.addEventListener('change', e => {
 })
 
 // Display dropdown when label input is clicked
-// document.querySelector('#editLabelInput').addEventListener('click', e => {
-//     console.log('edit label input clicked')
-// })
+document.querySelector('#editLabelInput').addEventListener('click', e => {
+    console.log('edit label input clicked')
+    displayDropdown('.edit__todo-dropdown')
+
+})
