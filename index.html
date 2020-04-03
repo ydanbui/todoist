@@ -61,16 +61,19 @@
             </div>
             <input class="edit__title" type="text" placeholder="Write task">
             <label class="edit__label"><span class="edit__label-text">Due date</span><input class="edit__date" type="date"></label>
-            <label class="edit__label"><span class="edit__label-text">Label</span>
+            <div class="edit__labels-section">
+                <div class="edit__label-label">Label</div>
                 <div class="edit__todo-div">
                     <div class="edit__label-badges"></div>
-                    <div id="addBtn" class="add-btn"></div>
-                    <input id="editLabelInput" class="edit__todo-label" placeholder="Add label">
-                    <ul class="edit__todo-dropdown dropdown">
+                    <label id="editAddLabel">
+                        <div id="addBtn" class="add-btn"></div>
+                        <input id="editLabelInput" class="edit__todo-label" placeholder="Add label">
+                        <ul class="edit__todo-dropdown dropdown">
 
-                    </ul>
+                        </ul>
+                    </label>
                 </div>
-            </label>
+            </div>
             <label class="edit__label" for=""><span class="edit__label-text">Description</span><textarea class="edit__description" name="" id="" cols="30" rows="10"></textarea></label>
             <section class="edit__history"></section>
         </article>

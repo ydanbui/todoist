@@ -113,6 +113,9 @@
         line-height: 125%;
         border-radius: 4px;
         padding: 4px 6px;
+        height: 28px;
+        display: flex;
+        align-items: center;
     }
 
     &__date {

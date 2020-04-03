@@ -99,10 +99,28 @@ editTodoLabel.addEventListener('input', e => {
     generateAddLabelMenuDOM(labels, editTodoDropdown, e)
 })
 
+// When the label input loses focus
+editTodoLabel.addEventListener('blur', e => {
+    console.log('onblur')
+
+    // hacky function to get it to work correctly
+    setTimeout(() => {
+        // if current todo has a label, dont show the input text field
+        if(currentTodo.label.length > 0) {
+        editTodoLabel.style.display='none'
+        // Also show the add label + btn
+        document.querySelector('#addBtn').style.display='block'
+    }   
+        editLabelBadgeContainer.style.display='flex'
+    }, 100)
+    
+})
+
 editDescription.addEventListener('input', e => {
     currentTodo.description = e.target.value
     saveTodos(todos)
 })
+
 
 editDescription.addEventListener('change', e => {
      // Search the history array for a description change log
@@ -122,6 +140,15 @@ editDescription.addEventListener('change', e => {
 // Display dropdown when label input is clicked
 document.querySelector('#editLabelInput').addEventListener('click', e => {
     console.log('edit label input clicked')
+
+    editLabelBadgeContainer.style.display = 'none'
+    // if current todo has a label, dont show the badges when dropdown shown
+    if(currentTodo.label.length > 0) {
+        editLabelBadgeContainer.style.display='none'
+    }
+
     displayDropdown('.edit__todo-dropdown')
+
+
 
 })

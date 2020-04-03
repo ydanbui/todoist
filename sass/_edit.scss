@@ -16,6 +16,16 @@
             display: inline-block;
         }
 
+        &-label {
+            color: $gray-3;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 125%;
+            width: 88px;
+
+            display: block;
+        }
+
         &-badges {
             display: flex;
         }
@@ -59,10 +69,21 @@
         color: $text-dark;
     }
 
+    &__labels-section {
+        display: flex;
+        align-items: center;
+        margin-bottom: 32px;
+
+        label {
+            display: flex;
+        }
+    }
+
     &__todo-div {
         // display:inline-block;
         display: flex;
         position: relative;
+        align-items: center;
     }
 
     &__todo-dropdown {

@@ -114,3 +114,10 @@ window.addEventListener('storage', e => {
         fillEditModule(currentTodo)
     }
 })
+
+// When the add label + btn in the edit module is clicked
+document.querySelector('#addBtn').addEventListener('click', function(){
+    editTodoLabel.style.display = 'block'
+    this.style.display = 'none'
+    console.log('displaying it as block')
+})

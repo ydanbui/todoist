@@ -322,13 +322,15 @@ const fillEditModule = currentTodo => {
 
     // If the current todo has a label
     if (currentTodo.label.length > 0) {
+        // Display the + btn instead of input field
         document.querySelector('#addBtn').style.display='block'
-        // editTodoLabel.style.display='none'
+        editTodoLabel.style.display='none'
         currentTodo.label.forEach(lab => {
             generateLabelBadgeDom(editLabelBadgeContainer, lab)
         })
     } else {
-        // editTodoLabel.style.display='block'
+        editTodoLabel.style.display='block'
+        // Don't display + btn
         document.querySelector('#addBtn').style.display='none'      
     }
 
@@ -498,11 +500,11 @@ function displayDropdown(classToQuery) {
     }
   }
 
-  function removeLabelDropdown() {
-      console.log('remoce dropdown runs')
-      editTodoLabel.blur()
+function removeLabelDropdown() {
+    console.log('remoce dropdown runs')
+    editTodoLabel.blur()
     document.querySelector('.edit__todo-dropdown').classList.remove("show");
-  }
+}
   
   // Close the dropdown menu if the user clicks outside of it
   window.onclick = function(e) {
