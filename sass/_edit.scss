@@ -29,6 +29,10 @@
         &-badges {
             display: flex;
         }
+
+        &-description {
+            align-items: flex-start;
+        }
     }
 
     input {
@@ -102,6 +106,59 @@
                 margin-right: 8px;
             }
         }
+    }
+
+    &__description {
+        font-size: 16px;
+        line-height: 125%;
+        /* or 20px */
+        color: $text-dark;
+        font-family: 'Titillium Web', sans-serif !important;
+        border: none;
+        resize: none;
+        width: 268px;
+        height: 150px;
+    }
+
+    &__history {
+        border-top: 1px solid $gray-1;
+        padding-top: 20px;
+
+        .edit__activity-heading {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .edit__change {
+            // position: relative;
+            display: flex;
+            align-items: baseline;
+            margin-top: 12px;
+            font-size: 14px;
+            
+            &:before {
+                content: '';
+                width: 4px;
+                height: 4px;
+                background-color: black;
+                display: inline-block;
+                margin-right: 8px;
+                align-self: center;
+                // position: absolute
+            }
+        }
+
+    }
+
+    &__timestamp {
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 125%;
+        /* or 12px */
+
+        margin-left: 4px;
+        color: #9099A6;
+        // align-self: baseline;
     }
 }
 

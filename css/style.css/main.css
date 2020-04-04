@@ -477,6 +477,12 @@ main {
   display: flex;
 }
 
+.edit__label-description {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
 .edit input {
   border: none;
   color: #738499;
@@ -560,6 +566,60 @@ main {
 
 .edit__todo-dropdown li svg {
   margin-right: 8px;
+}
+
+.edit__description {
+  font-size: 16px;
+  line-height: 125%;
+  /* or 20px */
+  color: #19223B;
+  font-family: 'Titillium Web', sans-serif !important;
+  border: none;
+  resize: none;
+  width: 268px;
+  height: 150px;
+}
+
+.edit__history {
+  border-top: 1px solid #E0E4E8;
+  padding-top: 20px;
+}
+
+.edit__history .edit__activity-heading {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.edit__history .edit__change {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.edit__history .edit__change:before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background-color: black;
+  display: inline-block;
+  margin-right: 8px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.edit__timestamp {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 125%;
+  /* or 12px */
+  margin-left: 4px;
+  color: #9099A6;
 }
 
 .add-btn {

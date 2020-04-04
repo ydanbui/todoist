@@ -173,9 +173,15 @@ class Todo {
 
     // Generate timeine dom elements in edit module
     generateHistoryDOM() {
+        const p = document.createElement('p') 
+        p.classList.add('edit__activity-heading')
+        p.textContent = 'Activity'
+        editHistory.appendChild(p)
+        
         // loop through todo.history array and generate p elements for each update
         this.history.forEach(changeObj => {
             const p = document.createElement('p') 
+            p.classList.add('edit__change')
             p.innerHTML = changeObj.text + getTimeSinceUpdate(changeObj)
             editHistory.appendChild(p)
         })
