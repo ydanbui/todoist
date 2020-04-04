@@ -144,6 +144,7 @@ const fillLabelMenu = (menuList, label) => {
             
             // Change the selected label's color when new color is clicked
             labelColorsEl.addEventListener('click', e => {
+                debugger
                 label.color = color
                 saveLabels(labels)
                 renderLabels(labels)
@@ -200,7 +201,7 @@ const renderLabels = labels => {
         sidebarLabels.innerHTML = ''
         // const ul = document.createElement('ul')
 
-        labels.forEach((label, index) => {
+        labels.forEach((label) => {
             const labelEl = document.createElement('li')
             labelEl.classList.add('sidebar__label')
             

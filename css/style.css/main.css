@@ -515,9 +515,9 @@ main {
 }
 
 .edit__title {
-  margin-bottom: 48px;
+  margin-bottom: 40px;
   display: block;
-  font-size: 24px;
+  font-size: 24px !important;
   font-weight: 600;
   line-height: 125%;
   /* identical to box height, or 30px */
