@@ -70,7 +70,7 @@ class Label {
     }
 
     // Generate the label menu
-    generateMenuDom(label) {
+    generateMenuDom() {
         const menu = document.createElement('div')
         menu.classList.add('menu')
 
@@ -78,6 +78,9 @@ class Label {
         menuBtn.classList.add('menu__btn')
         menuBtn.innerHTML = '<svg class="icon" id="menuIconEl"><use id = "menuUseEl" xlink:href="/img/icons.svg#icon-menu"></use></svg>'
         menuBtn.addEventListener('click', e=> {
+            // Set the currentlabel variable to this so menu populates with correct label data
+            globalCurrentLabel = this
+            fillLabelMenu(document.querySelector('.menu__list'), globalCurrentLabel)
             displayDropdown('.menu__list')
         })
 
@@ -91,7 +94,9 @@ class Label {
             event.stopPropagation();
         })
 
-        fillLabelMenu(menuList, label)
+        // const currentLabel = this
+
+        fillLabelMenu(menuList, globalCurrentLabel)
         
         menu.appendChild(menuBtn)
         menu.appendChild(menuList)
@@ -102,9 +107,19 @@ class Label {
 
 // Fill the label menu with the standard menu
 const fillLabelMenu = (menuList, label) => {
+    debugger
+    menuList.innerHTML = ''
     const setColorEl = document.createElement('li')
-    setColorEl.innerHTML = `<div class = "menu__color" style = "background-color: ${label.color};"></div><span>Set color</span>`
-  
+    // const divEl = document.createElement('div')
+    // divEl.classList.add('menu__color')
+    // divEl.style.backgroundColor = label.color
+    // debugger
+    // const spanEl = document.createElement('span')
+    // spanEl.textContent = 'nig'
+    setColorEl.innerHTML = `<div class = "menu__color" style = "background-color: ${globalCurrentLabel.color};"></div><span>Set color</span>`
+    // console.log(typeof label.color)
+    // setColorEl.appendChild(divEl)
+    // setColorEl.appendChild(spanEl)
 
     // Event listener to change menu when set color is clicked
     setColorEl.addEventListener('click', e => {
@@ -116,14 +131,14 @@ const fillLabelMenu = (menuList, label) => {
         // Move back to previous menu when clicked
         backBtn.addEventListener('click', e => {
             menuList.innerHTML = ''
-            fillLabelMenu(menuList, label)
+            fillLabelMenu(menuList, globalCurrentLabel)
         })
         
         const setColorEl = document.createElement('li')
         setColorEl.classList.add('menu__set-color')
         const colorDiv = document.createElement('div')
         colorDiv.classList.add('menu__color')
-        colorDiv.style.backgroundColor = label.color
+        colorDiv.style.backgroundColor = globalCurrentLabel.color
 
         const spanEl = document.createElement('span')
         spanEl.textContent = 'Set color'
@@ -144,8 +159,7 @@ const fillLabelMenu = (menuList, label) => {
             
             // Change the selected label's color when new color is clicked
             labelColorsEl.addEventListener('click', e => {
-                debugger
-                label.color = color
+                globalCurrentLabel.color = color
                 saveLabels(labels)
                 renderLabels(labels)
                 saveTodos(todos)
@@ -162,7 +176,7 @@ const fillLabelMenu = (menuList, label) => {
     deleteLabelEl.textContent = 'Delete label'
 
     deleteLabelEl.addEventListener('click', e=> {
-        const ind = labels.findIndex(el => el === label)
+        const ind = labels.findIndex(el => el === globalCurrentLabel)
         deleteLabel(labels, ind)
         saveLabels(labels)
         console.log(labels)
@@ -207,7 +221,7 @@ const renderLabels = labels => {
             
             labelEl.appendChild(label.generateBulletDom())
             labelEl.appendChild(label.generateTextDom())
-            labelEl.appendChild(label.generateMenuDom(label))
+            labelEl.appendChild(label.generateMenuDom())
             sidebarLabels.appendChild(labelEl)
         })
     } else {

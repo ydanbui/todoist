@@ -9,8 +9,13 @@
 // Initialize todos with localstorage data if it exists
 let todos = getSavedTodos()
 
+const labels = getSavedLabels()
+
 // Current todo to be displayed by edit module
 let currentTodo = todos[0]
+
+// Current label to be displayed by label menu in sidebar
+let globalCurrentLabel = labels[0]
 
 const labelss = [{
     name: 'Design',
@@ -19,8 +24,6 @@ const labelss = [{
     name: 'Web Development',
     color: '#B7DDAC'
 }]
-
-const labels = getSavedLabels()
 
 const labelColors = ['#FFB45E', '#B7DDAC','#B1DBF7', 'purple', 'red', 'pink', 'blue', 'yellow']
 
